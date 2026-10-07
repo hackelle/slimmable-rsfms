@@ -20,11 +20,16 @@ Static site with no build step, served from the repository root via GitHub Pages
 
 `static/js/data.js` defines `window.PAPER_DATA` and `window.REBUTTAL_DATA`.
 
-- `PAPER_DATA`: curves for Fig. 1, the post-hoc results (7 datasets) and learned-vs-post-hoc (4 datasets).
-  They were read directly from the vector paths of the paper's matplotlib PDFs (values match to 3 decimals).
-  Replace them with the raw results when available. The format is
-  `{series: [{label, color, pts: [[rel_compute, value], ...]}], bands, refs, ylabel}`.
-- `REBUTTAL_DATA`: tables R1–R9 from the OpenReview rebuttal.
+Generated from the raw result CSVs:
+
+```
+RESULTS_DIR=path/to/csv_files_from_z3 python3 scripts/build_data.py scripts static/js/data.js
+```
+
+`scripts/rr.py` re-implements `read_results()` from the analysis notebook. `PAPER_DATA` holds Fig. 1
+(10%-wide compute bins, as in the paper), the post-hoc results (7 datasets) and learned-vs-post-hoc
+(4 datasets, epoch-100 checkpoints). `REBUTTAL_DATA` holds the rebuttal analyses with x = relative compute;
+geo-shift, class-imbalance and class-wise AP values are the notebook outputs (their features are not in the CSV export).
 
 Series colours and dash styles are assigned by label in `charts.js` (`STYLE`): one hue per model family,
 dashed = smaller variant.

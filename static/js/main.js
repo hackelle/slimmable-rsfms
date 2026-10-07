@@ -30,9 +30,10 @@
 
   /* ---------- Fig. 1 ---------- */
   function fig1() {
-    const a = chart('#chart-fig1a', { relative: false, ypct: true, ydomain: [0, 1.06], yclip: [0, 1.06], file: 'fig1a_retention', note: 'Shaded: spread across models / datasets, as in the paper.', aria: 'Relative retention vs compute, RS FMs and CV baselines' });
+    const bin = (x) => x >= 1 ? 'Rel. compute = 100%' : 'Rel. compute in [' + Math.round(x * 100) + '%, ' + Math.round(x * 100 + 10) + '%)';
+    const a = chart('#chart-fig1a', { relative: false, ypct: true, ydomain: [0, 1.06], yclip: [0, 1.06], xtip: bin, file: 'fig1a_retention', note: 'Points are 10%-wide compute bins (plotted at their lower edge), as in the paper. Shaded: ±2 SD.', aria: 'Relative retention vs compute, RS FMs and CV baselines' });
     a.set({ series: P.fig1a.series, bands: P.fig1a.bands, ylabel: 'Rel. retention rate' });
-    const b = chart('#chart-fig1b', { file: 'fig1b_eurosat', note: 'Shaded: spread across models / seeds, as in the paper.', aria: 'Accuracy on m-eurosat vs compute' });
+    const b = chart('#chart-fig1b', { xtip: bin, file: 'fig1b_eurosat', note: 'Same 10% compute bins as (a). Shaded: ±2 SD.', aria: 'Accuracy on m-eurosat vs compute' });
     b.set({ series: P.fig1b.series, bands: P.fig1b.bands, refs: P.fig1b.refs.map((r) => Object.assign({ text: 'CV MAE @ 100% compute' }, r)), ylabel: 'Accuracy on m-eurosat' });
   }
 
@@ -44,7 +45,7 @@
     'm-so2sat': '17 local climate zones with geographically disjoint train/test cities (Cultural-10 split) make this the hardest classification setting; DOFA (large) is the clear outlier.',
     'm-cashew-plant': 'Dense prediction is even more robust: all models keep 98–101% IoU, curves are nearly flat across the entire compute range.',
     'm-SA-crop-type': 'The harder 10-class crop-type segmentation still retains 78–94% IoU at the smallest budget.',
-    'oscd': 'Change detection keeps 94–109% IoU. Both DOFA models and Prithvi-EO-2.0 (300M) exceed their full-scale IoU at small widths.'
+    'oscd': 'Change detection keeps 94–109% mIoU; both DOFA models and Prithvi-EO-2.0 (300M) exceed their full-width score. Caveat: mIoU averages the change class (IoU 0.12–0.25 at full width) with the dominant no-change class (≈0.91). For both DOFA models the change-class IoU roughly doubles when slimmed, so values above 100% partly reflect a weak full-width baseline.'
   };
   const DS_LABEL = { 'm-eurosat': 'm-eurosat', 'm-bigearthnet': 'm-bigearthnet', 'm-brick-kiln': 'm-brick-kiln', 'm-so2sat': 'm-so2sat', 'm-cashew-plant': 'm-cashew-plant', 'm-SA-crop-type': 'm-SA-crop-type', 'oscd': 'OSCD' };
 
@@ -71,12 +72,12 @@
     // fine-tuning
     {
       const st = { ds: 'm-eurosat', rel: false };
-      const c = chart('#rb-ft-chart', { xlog: true, xticks: [0.01, 0.1, 1], file: 'rebuttal_finetune' });
+      const c = chart('#rb-ft-chart', { xlog: true, file: 'rebuttal_finetune' });
       const draw = () => {
         const d = R.finetune[st.ds], s = [];
         Object.keys(d).forEach((m) => {
-          s.push(ser(m + ' · linear probe', R.finetune.x, d[m].linear, { color: fam(m), dash: true }));
-          s.push(ser(m + ' · full fine-tune', R.finetune.x, d[m].finetune, { color: fam(m), dash: false }));
+          s.push(ser(m + ' · linear probe', d[m].x, d[m].linear, { color: fam(m), dash: true }));
+          s.push(ser(m + ' · full fine-tune', d[m].x, d[m].finetune, { color: fam(m), dash: false }));
         });
         c.set({ series: s, ylabel: (st.ds === 'm-eurosat' ? 'Accuracy' : 'mAP') + ' on ' + st.ds }, { relative: st.rel });
       };
@@ -87,10 +88,10 @@
     // newer FMs
     {
       const st = { ds: 'm-eurosat', proto: 'knn', rel: false };
-      const c = chart('#rb-new-chart', { xlog: true, xticks: [0.001, 0.01, 0.1, 0.5, 1], file: 'rebuttal_new_fms' });
+      const c = chart('#rb-new-chart', { xlog: true, file: 'rebuttal_new_fms' });
       const draw = () => {
         const d = R.newfms[st.proto][st.ds];
-        const s = Object.keys(d).map((m) => ser(m, R.newfms.x, d[m], m === 'Panopticon' || m === 'Copernicus-FM' ? window.SeriesStyle(m) : { color: fam(m), dash: true }));
+        const s = Object.keys(d).map((m) => ser(m, d[m].x, d[m].y, m === 'Panopticon' || m === 'Copernicus-FM' ? window.SeriesStyle(m) : { color: fam(m), dash: true }));
         c.set({ series: s, ylabel: (st.ds === 'm-eurosat' ? 'Accuracy' : 'mAP') + ' on ' + st.ds + (st.proto === 'knn' ? ' (k-NN)' : ' (linear)') }, { relative: st.rel });
       };
       makeSeg($('#rb-new-ds'), [['m-eurosat', 'm-eurosat'], ['m-bigearthnet', 'm-bigearthnet']], st.ds, (v) => { st.ds = v; draw(); });
@@ -101,12 +102,12 @@
     // geographic shift
     {
       const st = { rel: false };
-      const c = chart('#rb-geo-chart', { xlog: true, xticks: [0.01, 0.1, 1], file: 'rebuttal_geo_shift' });
+      const c = chart('#rb-geo-chart', { xlog: true, file: 'rebuttal_geo_shift' });
       const draw = () => {
         const s = [];
-        Object.keys(R.geo).filter((k) => k !== 'x').forEach((m) => {
-          s.push(ser(m + ' · random split', R.geo.x, R.geo[m].random, { color: fam(m), dash: true }));
-          s.push(ser(m + ' · Cultural-10 (disjoint cities)', R.geo.x, R.geo[m]['Cultural-10'], { color: fam(m), dash: false }));
+        Object.keys(R.geo).forEach((m) => {
+          s.push(ser(m + ' · random split', R.geo[m].x, R.geo[m].random, { color: fam(m), dash: true }));
+          s.push(ser(m + ' · Cultural-10 (disjoint cities)', R.geo[m].x, R.geo[m]['Cultural-10'], { color: fam(m), dash: false }));
         });
         c.set({ series: s, ylabel: 'Accuracy on m-so2sat' }, { relative: st.rel });
       };
@@ -116,27 +117,27 @@
     // class imbalance
     {
       const st = { m: 'TerraMind-1.0 (base)', rel: false };
-      const ramp = ['#a7dccb', '#5fbfa2', '#228c72', '#0b5546'];
-      const c = chart('#rb-imb-chart', { xlog: true, xticks: [0.01, 0.1, 1], file: 'rebuttal_imbalance' });
+      const ramp = ['#b9e4d6', '#7ccbb2', '#3fa587', '#1d7a62', '#0b4f3f'];
+      const c = chart('#rb-imb-chart', { xlog: true, file: 'rebuttal_imbalance' });
       const draw = () => {
         const d = R.imbalance[st.m];
-        const s = ['0.01', '0.1', '0.2', '1.0'].map((k, i) => ser('imbalance ratio ' + k + (k === '1.0' ? ' (balanced)' : ''), R.imbalance.x, d[k], { color: ramp[i], dash: false }));
+        const s = ['0.01', '0.1', '0.2', '0.5', '1.0'].map((k, i) => ser('imbalance ratio ' + k + (k === '1.0' ? ' (balanced)' : ''), d.x, d[k], { color: ramp[i], dash: false }));
         c.set({ series: s, ylabel: 'Accuracy on m-eurosat · ' + st.m }, { relative: st.rel });
       };
-      makeSeg($('#rb-imb-m'), Object.keys(R.imbalance).filter((k) => k !== 'x').map((k) => [k, k]), st.m, (v) => { st.m = v; draw(); });
+      makeSeg($('#rb-imb-m'), Object.keys(R.imbalance).map((k) => [k, k]), st.m, (v) => { st.m = v; draw(); });
       makeSeg($('#rb-imb-view'), [[false, 'Absolute'], [true, 'Retention']], false, (v) => { st.rel = v; c.update({ relative: v }); });
       draw();
     }
     // class-wise AP
     {
       const st = { rel: false };
-      const c = chart('#rb-cls-chart', { xlog: true, xticks: [0.01, 0.1, 1], file: 'rebuttal_classwise_ap' });
+      const c = chart('#rb-cls-chart', { xlog: true, file: 'rebuttal_classwise_ap' });
       const draw = () => {
         const s = [];
-        Object.keys(R.classwise).filter((k) => k !== 'x').forEach((m) => {
+        Object.keys(R.classwise).forEach((m) => {
           const e = R.classwise[m];
-          s.push(ser(m + ' · easiest: ' + e.easiest[0], R.classwise.x, e.easiest[1], { color: fam(m), dash: false }));
-          s.push(ser(m + ' · hardest: ' + e.hardest[0], R.classwise.x, e.hardest[1], { color: fam(m), dash: true }));
+          s.push(ser(m + ' · easiest: ' + e.easiest[0], e.x, e.easiest[1], { color: fam(m), dash: false }));
+          s.push(ser(m + ' · hardest: ' + e.hardest[0], e.x, e.hardest[1], { color: fam(m), dash: true }));
         });
         c.set({ series: s, ylabel: 'Class AP on m-bigearthnet' }, { relative: st.rel });
       };
@@ -218,7 +219,8 @@
     explorer('ph', P.posthoc, DS_NOTES, 'posthoc');
     explorer('nv', P.native, {
       'm-eurosat': 'Slimmable MoCo matches or beats regular MoCo at most budgets; regular MAE beats slimmable MAE almost everywhere.',
-      'm-bigearthnet': 'Both MoCo variants reach similar full-scale mAP, but slimmable MoCo gets close to its peak at far lower compute. Slimmable MAE also degrades at large widths.'
+      'm-bigearthnet': 'Both MoCo variants reach similar full-scale mAP, but slimmable MoCo gets close to its peak at far lower compute. Slimmable MAE also degrades at large widths.',
+      'm-so2sat': 'The exception to the MAE pattern: here slimmable MAE beats regular MAE at both the smallest and the full width.'
     }, 'learned_vs_posthoc');
     rebuttal();
     figTabs();
