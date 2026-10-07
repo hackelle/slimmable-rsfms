@@ -19,7 +19,7 @@ def curve(model, ds, task, slim='SlimAttn+SlimFFN', metric=None):
 
 data = {'posthoc': {}, 'native': {}}
 for ds, (task, yl, desc) in DS.items():
-    data['posthoc'][ds] = dict(ylabel=yl, desc=desc, series=[dict(label=LBL[m], pts=curve(m, ds, task)) for m in RS if path(m, ds, task).exists()])
+    data['posthoc'][ds] = dict(ylabel=yl, desc=desc, series=[dict(label=LBL[m], pts=curve(m, ds, task)) for m in RS + ['panopticon_vitb14', 'copernicusFM'] if path(m, ds, task).exists()])
 
 NAT = {'MAE ViT base 1.00': 'MAE: regular training', 'MAE ViT base slimable': 'MAE: slimmable training',
        'MoCo ViT base 1.00': 'MoCo: regular training', 'MoCo ViT base slimable': 'MoCo: slimmable training'}
