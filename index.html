@@ -16,7 +16,8 @@
   <meta name="citation_author" content="Demir, Begüm">
   <meta name="citation_publication_date" content="2026">
   <meta name="citation_conference_title" content="Advances in Neural Information Processing Systems (NeurIPS)">
-  <!-- TODO: <meta name="citation_pdf_url" content="https://arxiv.org/pdf/XXXX.XXXXX"> -->
+  <meta name="citation_pdf_url" content="https://arxiv.org/pdf/2601.22841">
+  <meta name="citation_arxiv_id" content="2601.22841">
 
   <!-- Open Graph / Twitter -->
   <meta property="og:type" content="article">
@@ -65,7 +66,7 @@
       <a href="#results">Results</a>
       <a href="#learned">Learned slimming</a>
       <a href="#why">Why?</a>
-      <a href="#new">New analyses</a>
+      <a href="#robustness">Robustness</a>
       <a href="#ablations">Ablations</a>
       <a href="#code">Code</a>
       <a href="#cite">Cite</a>
@@ -80,6 +81,7 @@
   <canvas id="hero-canvas" aria-hidden="true"></canvas>
   <div class="wrap">
     <span class="venue"><span class="dot"></span>NeurIPS 2026 · Sydney · Poster</span>
+    <div class="session">Poster Session 1 · Hall 1-4 · 10:00 AM AEDT (Australia/Sydney)</div>
     <h1><span class="q">How Much of a Model Do We Need?</span><br>Redundancy and Slimmability in Remote Sensing Foundation Models</h1>
     <p class="subtitle">Cut the width of a pretrained remote sensing foundation model to a few percent of its compute, with no retraining, and it still keeps most of its accuracy. Computer vision models don't.</p>
     <div class="authors"><!-- TODO: add personal page links -->
@@ -89,12 +91,10 @@
     </div>
     <div class="affil">BIFOLD &amp; Technische Universität Berlin · <sup>*</sup>corresponding author</div>
     <div class="btns">
-      <!-- TODO: replace hrefs once available and remove the "pending" class -->
-      <a class="btn pending" href="#" title="Link coming soon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg>Paper
-      </a>
-      <a class="btn ghost pending" href="#" title="Link coming soon">arXiv</a>
-      <a class="btn ghost pending" href="#" title="Link coming soon">OpenReview</a>
+      <!-- TODO: add the code repository link and remove the "pending" class -->
+      <a class="btn" href="https://arxiv.org/pdf/2601.22841" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg>Paper</a>
+      <a class="btn ghost" href="https://arxiv.org/abs/2601.22841" target="_blank" rel="noopener">arXiv</a>
+      <a class="btn ghost" href="https://openreview.net/forum?id=0IXZABr3Tf" target="_blank" rel="noopener">OpenReview</a>
       <a class="btn ghost pending" href="#" title="Code release coming soon">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 12 .5z"/></svg>Code
       </a>
@@ -107,10 +107,10 @@
 <!-- ================= OVERVIEW ================= -->
 <section id="overview" style="padding-top:0">
   <div class="wrap">
-    <div class="tldr reveal"><b>TL;DR.</b> We uniformly shrink the width of every transformer block in eight pretrained remote sensing (RS) foundation models (FMs) and evaluate them on classification, segmentation and change detection. RS FMs degrade gracefully, while MAE and DINOv2 trained on natural images collapse over the same compute range. Feature correlation, explained variance and effective dimensionality show why: task-relevant information is encoded redundantly in few directions.</div>
+    <div class="tldr reveal"><b>TL;DR.</b> We uniformly shrink the width of every transformer block in ten pretrained remote sensing (RS) foundation models (FMs) and evaluate them on classification, segmentation and change detection. RS FMs degrade gracefully, while MAE and DINOv2 trained on natural images collapse over the same compute range. Feature correlation, explained variance and effective dimensionality show why: task-relevant information is encoded redundantly in few directions.</div>
 
     <div class="stats reveal">
-      <div class="stat"><div class="v">8 <small>+2</small></div><div class="l">RS FMs from 23M to 631M parameters; Panopticon and Copernicus-FM added for the camera-ready</div></div>
+      <div class="stat"><div class="v">10</div><div class="l">RS FMs from 23M to 631M parameters, evaluated with k-NN, linear probing and full fine-tuning</div></div>
       <div class="stat"><div class="v">7</div><div class="l">downstream datasets covering scene classification, semantic segmentation and change detection</div></div>
       <div class="stat hl"><div class="v">≈85%</div><div class="l">mean relative accuracy of RS FMs at their smallest compute budget (0.8–6.4% of full compute; 4 classification datasets, k-NN)</div></div>
       <div class="stat warm"><div class="v">10–33%</div><div class="l">what CV MAE and DINOv2 keep on ImageNet-10/-100 at their smallest budget (2.9% compute)</div></div>
@@ -135,7 +135,7 @@
         <span class="eyebrow">Abstract</span>
         <div class="abstract" style="columns:auto">
           <p>Large-scale foundation models (FMs) in remote sensing (RS) are developed following paradigms established in computer vision (CV), yet the validity of transferring CV scaling laws to RS has not been systematically examined. We hypothesize that RS FMs enter an overparameterized regime at substantially smaller scales than their CV counterparts, with task-relevant information encoded redundantly across model dimensions.</p>
-          <p>To test this hypothesis, we apply <em>post-hoc slimmability</em>, uniform width reduction of pretrained encoder transformer blocks, as a tool to measure representational redundancy across eight state-of-the-art RS FMs on classification, segmentation, and change detection tasks. RS FMs retain 69–109% relative accuracy on RS datasets under aggressive width reduction, while MAE and DINOv2 pretrained on natural images degrade sharply on ImageNet subsets of matched class count over the same range of computational requirements. A CV MAE evaluated directly on the same RS datasets narrows but does not close the gap, indicating that both dataset characteristics and domain-specific pretraining contribute.</p>
+          <p>To test this hypothesis, we apply <em>post-hoc slimmability</em>, uniform width reduction of pretrained encoder transformer blocks, as a tool to measure representational redundancy across ten state-of-the-art RS FMs on classification, segmentation, and change detection tasks. At their smallest compute budget (0.8–6.4% of full compute), most RS FMs retain more than 80% of their classification accuracy (85% on average), while MAE and DINOv2 pretrained on natural images retain only 10–33% on ImageNet subsets of matched class count at a comparable budget. A CV MAE evaluated directly on m-eurosat retains 74%, narrowing but not closing the gap to RS FMs on the same dataset (82–95%), indicating that both dataset characteristics and domain-specific pretraining contribute.</p>
           <p>Mechanistic analyses such as feature correlation, explained variance, and effective dimensionality indicate that task-relevant variance concentrates in few principal components and is redundantly encoded across model dimensions. We further show that learned slimmable training improves over post-hoc slimmability for contrastive objectives, while reconstruction-based objectives do not benefit from current slimmable training protocols. Our findings establish post-hoc slimming as a practical deployment strategy for resource-constrained RS applications and as a diagnostic tool for representational redundancy in RS FMs.</p>
         </div>
       </div>
@@ -224,8 +224,8 @@
   <div class="wrap">
     <div class="section-head reveal">
       <span class="eyebrow">Results</span>
-      <h2>Eight RS foundation models, seven datasets</h2>
-      <p>DOFA, Prithvi-EO-2.0, TerraMind-1.0 (base and large each) and SSL4EO ViT-S (DINO and MoCo). Each line starts at that model's smallest reachable compute budget, which depends on how much of the model sits in the (unslimmed) patch embedding.</p>
+      <h2>Ten RS foundation models, seven datasets</h2>
+      <p>DOFA, Prithvi-EO-2.0, TerraMind-1.0 (base and large each), SSL4EO ViT-S (DINO and MoCo), Panopticon and Copernicus-FM. Each line starts at that model's smallest reachable compute budget, which depends on how much of the model sits in the (unslimmed) patch embedding.</p>
     </div>
     <div class="card chart-card reveal">
       <div class="controls">
@@ -338,42 +338,42 @@
 </section>
 
 <!-- ================= NEW (REBUTTAL) ================= -->
-<section id="new" class="alt">
+<section id="robustness" class="alt">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow">Beyond the submission</span>
-      <h2>New analyses in the camera-ready</h2>
-      <p>Experiments added during the review process. They test whether the redundancy is an artefact of frozen features, model selection, geography or class balance.</p>
+      <span class="eyebrow">Robustness</span>
+      <h2>Is the redundancy an artefact?</h2>
+      <p>We test whether the redundancy is an artefact of frozen features, model selection, geography or class balance.</p>
     </div>
     <div class="card chart-card reveal">
       <div class="controls"><div id="rb-tabs"></div></div>
 
       <div data-rb-tab="ft" data-title="Full fine-tuning">
-        <p class="small" style="color:var(--ink-2)"><span class="tag new">Fine-tuning</span><br>Full fine-tuning (LR 3e-3, three seeds) raises absolute performance, but the accuracy-vs-width curves keep their shape. The redundancy is not an artefact of the frozen-feature protocol.</p>
+        <p class="small" style="color:var(--ink-2)"><span class="tag">Fine-tuning</span><br>Full fine-tuning (LR 3e-3, three seeds) raises absolute performance, but the accuracy-vs-width curves keep their shape. The redundancy is not an artefact of the frozen-feature protocol.</p>
         <div class="controls"><div class="ctl"><span class="ctl-label">Dataset</span><div id="rb-ft-ds"></div></div><div class="ctl"><span class="ctl-label">Y</span><div id="rb-ft-view"></div></div></div>
         <div id="rb-ft-chart"></div>
       </div>
 
       <div data-rb-tab="new" data-title="Newer FMs" hidden>
-        <p class="small" style="color:var(--ink-2)"><span class="tag new">Panopticon · Copernicus-FM</span><br>Copernicus-FM is among the most slimmable models we evaluated. Panopticon is less slimmable but still substantially so. Note: Panopticon's embedding holds more than 66% of its parameters and is not slimmed, so its compute never drops below 63%.</p>
+        <p class="small" style="color:var(--ink-2)"><span class="tag">Panopticon · Copernicus-FM</span><br>Copernicus-FM is among the most slimmable models we evaluated. Panopticon is less slimmable but still substantially so. Note: Panopticon's embedding holds more than 66% of its parameters and is not slimmed, so its compute never drops below 63%.</p>
         <div class="controls"><div class="ctl"><span class="ctl-label">Dataset</span><div id="rb-new-ds"></div></div><div class="ctl"><span class="ctl-label">Protocol</span><div id="rb-new-proto"></div></div><div class="ctl"><span class="ctl-label">Y</span><div id="rb-new-view"></div></div></div>
         <div id="rb-new-chart"></div>
       </div>
 
       <div data-rb-tab="geo" data-title="Geographic shift" hidden>
-        <p class="small" style="color:var(--ink-2)"><span class="tag new">m-so2sat</span><br>GEO-Bench's Cultural-10 split uses geographically disjoint train and test cities. A random split (five draws, same sizes) gives much higher retention, e.g. ≈0.93 vs ≈0.74 for DOFA (base) at the smallest budget. Distribution shift reduces redundancy, but a lot of it survives.</p>
+        <p class="small" style="color:var(--ink-2)"><span class="tag">m-so2sat</span><br>GEO-Bench's Cultural-10 split uses geographically disjoint train and test cities. A random split (five draws, same sizes) gives much higher retention, e.g. ≈0.93 vs ≈0.74 for DOFA (base) at the smallest budget. Distribution shift reduces redundancy, but a lot of it survives.</p>
         <div class="controls"><div class="ctl"><span class="ctl-label">Y</span><div id="rb-geo-view"></div></div></div>
         <div id="rb-geo-chart"></div>
       </div>
 
       <div data-rb-tab="imb" data-title="Class imbalance" hidden>
-        <p class="small" style="color:var(--ink-2)"><span class="tag new">m-eurosat</span><br>Exponential class imbalance (class 0 keeps all samples, class 9 is subsampled down to the given ratio; five seeds). Accuracy drops at every width, but the curves stay roughly parallel: slimming does not interact strongly with imbalance.</p>
+        <p class="small" style="color:var(--ink-2)"><span class="tag">m-eurosat</span><br>Exponential class imbalance (class 0 keeps all samples, class 9 is subsampled down to the given ratio; five seeds). Accuracy drops at every width, but the curves stay roughly parallel: slimming does not interact strongly with imbalance.</p>
         <div class="controls"><div class="ctl"><span class="ctl-label">Model</span><div id="rb-imb-m"></div></div><div class="ctl"><span class="ctl-label">Y</span><div id="rb-imb-view"></div></div></div>
         <div id="rb-imb-chart"></div>
       </div>
 
       <div data-rb-tab="cls" data-title="Class-wise AP" hidden>
-        <p class="small" style="color:var(--ink-2)"><span class="tag new">m-bigearthnet</span><br>Hardest and easiest class per model (lowest / highest AP averaged over the five widths). Easy classes keep almost all their AP; the hardest lose a larger share than the aggregate mAP but do not fail outright. Aggregate metrics can hide uneven class-wise degradation.</p>
+        <p class="small" style="color:var(--ink-2)"><span class="tag">m-bigearthnet</span><br>Hardest and easiest class per model (lowest / highest AP averaged over the five widths). Easy classes keep almost all their AP; the hardest lose a larger share than the aggregate mAP but do not fail outright. Aggregate metrics can hide uneven class-wise degradation.</p>
         <div class="controls"><div class="ctl"><span class="ctl-label">Y</span><div id="rb-cls-view"></div></div></div>
         <div id="rb-cls-chart"></div>
       </div>
@@ -520,8 +520,9 @@
 
 <footer>
   <div class="wrap">
-    <span>© 2026 Hackel, Burgert, Demir · BIFOLD / TU Berlin</span>
-    <span>Interactive curves are computed from the raw result CSVs. Sentinel-2 patch from BigEarthNet.</span>
+    <p>This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank" rel="noopener">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank" rel="noopener">Nerfies</a> project page.<br>
+    This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative Commons Attribution-ShareAlike 4.0 International License</a>.</p>
+    <p class="muted">© 2026 Hackel, Burgert, Demir · BIFOLD / TU Berlin · Interactive curves are computed from the raw results. Sentinel-2 patch from BigEarthNet.</p>
   </div>
 </footer>
 </body>

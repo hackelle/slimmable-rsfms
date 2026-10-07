@@ -39,10 +39,10 @@
 
   /* ---------- post-hoc explorer ---------- */
   const DS_NOTES = {
-    'm-eurosat': 'All eight models stay above 80% retention down to their smallest budget. Degradation only starts below ~20% compute.',
-    'm-bigearthnet': 'Seven of eight models keep 78–87%. DOFA (large) drops to 67%, partly because it peaks at an intermediate width, so its full-scale reference is below its own maximum. This harder multi-label task needs roughly 2–10% compute.',
+    'm-eurosat': 'All models except Panopticon stay above 80% retention down to their smallest budget; degradation only starts below ~20% compute. Panopticon keeps its large embedding at full width, so it never drops below 63% compute.',
+    'm-bigearthnet': 'Most models keep 78–87%. DOFA (large) drops to 67%, partly because it peaks at an intermediate width, so its full-scale reference is below its own maximum. This harder multi-label task needs roughly 2–10% compute.',
     'm-brick-kiln': 'The binary task tolerates the smallest budgets; several models end at or above their full-scale accuracy.',
-    'm-so2sat': '17 local climate zones with geographically disjoint train/test cities (Cultural-10 split) make this the hardest classification setting; DOFA (large) is the clear outlier.',
+    'm-so2sat': '17 local climate zones with geographically disjoint train/test cities (Cultural-10 split) make this the hardest classification setting; DOFA (large) and Panopticon are the clear outliers.',
     'm-cashew-plant': 'Dense prediction is even more robust: all models keep 98–101% IoU, curves are nearly flat across the entire compute range.',
     'm-SA-crop-type': 'The harder 10-class crop-type segmentation still retains 78–94% IoU at the smallest budget.',
     'oscd': 'Change detection keeps 94–109% mIoU; both DOFA models and Prithvi-EO-2.0 (300M) exceed their full-width score. Caveat: mIoU averages the change class (IoU 0.12–0.25 at full width) with the dominant no-change class (≈0.91). For both DOFA models the change-class IoU roughly doubles when slimmed, so values above 100% partly reflect a weak full-width baseline.'
