@@ -266,7 +266,7 @@
         });
         rows.sort((a, b) => b.p[1] - a.p[1]);
         tt.textContent = '';
-        h('div', 'tt-h', tt, (this.o.xname || 'Rel. compute') + ' ≈ ' + pct(best));
+        h('div', 'tt-h', tt, this.o.xtip ? this.o.xtip(best) : (this.o.xname || 'Rel. compute') + ' ≈ ' + pct(best));
         rows.forEach(({ s, p }) => {
           const r = h('div', 'row', tt);
           const k = h('i', 'key' + (s.dash ? ' dash' : ''), r); k.style.borderTopColor = s.color;

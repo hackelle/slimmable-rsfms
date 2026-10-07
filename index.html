@@ -81,7 +81,7 @@
   <div class="wrap">
     <span class="venue"><span class="dot"></span>NeurIPS 2026 · Sydney · Poster</span>
     <h1><span class="q">How Much of a Model Do We Need?</span><br>Redundancy and Slimmability in Remote Sensing Foundation Models</h1>
-    <p class="subtitle">Cut the width of a pretrained remote sensing foundation model to about 1% of its compute, with no retraining, and it still keeps most of its accuracy. Computer vision models don't.</p>
+    <p class="subtitle">Cut the width of a pretrained remote sensing foundation model to a few percent of its compute, with no retraining, and it still keeps most of its accuracy. Computer vision models don't.</p>
     <div class="authors"><!-- TODO: add personal page links -->
       <span>Leonard Hackel<sup>*</sup></span>
       <span>Tom Burgert</span>
@@ -112,8 +112,8 @@
     <div class="stats reveal">
       <div class="stat"><div class="v">8 <small>+2</small></div><div class="l">RS FMs from 23M to 631M parameters; Panopticon and Copernicus-FM added for the camera-ready</div></div>
       <div class="stat"><div class="v">7</div><div class="l">downstream datasets covering scene classification, semantic segmentation and change detection</div></div>
-      <div class="stat hl"><div class="v">≈86%</div><div class="l">mean relative accuracy of RS FMs at the smallest compute budget (4 classification datasets)</div></div>
-      <div class="stat warm"><div class="v">12–35%</div><div class="l">what CV MAE and DINOv2 keep on ImageNet subsets at the same budget</div></div>
+      <div class="stat hl"><div class="v">≈85%</div><div class="l">mean relative accuracy of RS FMs at their smallest compute budget (0.8–6.4% of full compute; 4 classification datasets, k-NN)</div></div>
+      <div class="stat warm"><div class="v">10–33%</div><div class="l">what CV MAE and DINOv2 keep on ImageNet-10/-100 at their smallest budget (2.9% compute)</div></div>
     </div>
 
     <div class="grid-2 reveal" style="margin-top:28px">
@@ -128,7 +128,7 @@
         <div id="chart-fig1b"></div>
       </div>
     </div>
-    <p class="muted small" style="margin-top:12px">Figure 1 of the paper, interactive. Moving the CV MAE from ImageNet to m-eurosat lifts its retention at the smallest budget from 12–35% to 76%, still below the 82–96% of RS FMs. Both the evaluation domain and RS-specific pretraining contribute.</p>
+    <p class="muted small" style="margin-top:12px">Figure 1 of the paper, interactive. Moving the CV MAE from ImageNet to m-eurosat lifts its retention at its smallest budget (2.9% compute) from 10–33% to 74%, still below the 82–95% of RS FMs on the same dataset. Both the evaluation domain and RS-specific pretraining contribute.</p>
 
     <div class="grid-2 reveal" style="margin-top:44px; align-items:start">
       <div>
@@ -212,7 +212,7 @@
     </div>
 
     <div class="grid-3 reveal" style="margin-top:18px">
-      <div class="card"><span class="tag">Evaluation</span><h3>Frozen features, 31 widths</h3><p class="muted small">k-NN (k = 5) or linear probe on penultimate features for classification; a SegFormer-style multi-scale head for segmentation and change detection. Five seeds per experiment.</p></div>
+      <div class="card"><span class="tag">Evaluation</span><h3>Frozen features, 31 widths</h3><p class="muted small">k-NN (k = 5) or linear probe on penultimate features for classification; a SegFormer-style multi-scale head for segmentation and change detection. Five seeds for classification; one run per width for segmentation and change detection.</p></div>
       <div class="card"><span class="tag">Metrics</span><h3>Relative compute and retention</h3><p class="muted small">Compute = FLOPs at width <i>s</i> / FLOPs at full width. Retention = metric(<i>s</i>) / metric(1.0), so datasets with different absolute scores are comparable.</p></div>
       <div class="card"><span class="tag">Datasets</span><h3>GEO-Bench + OSCD</h3><p class="muted small">m-brick-kiln, m-eurosat, m-so2sat, m-bigearthnet (classification); m-cashew-plant, m-SA-crop-type (segmentation); OSCD (change detection).</p></div>
     </div>
@@ -349,13 +349,13 @@
       <div class="controls"><div id="rb-tabs"></div></div>
 
       <div data-rb-tab="ft" data-title="Full fine-tuning">
-        <p class="small" style="color:var(--ink-2)"><span class="tag new">Fine-tuning</span><br>Full fine-tuning (LR 3e-3, 40 epochs) raises absolute performance, but the accuracy-vs-width curves keep their shape. The redundancy is not an artefact of the frozen-feature protocol.</p>
+        <p class="small" style="color:var(--ink-2)"><span class="tag new">Fine-tuning</span><br>Full fine-tuning (LR 3e-3, three seeds) raises absolute performance, but the accuracy-vs-width curves keep their shape. The redundancy is not an artefact of the frozen-feature protocol.</p>
         <div class="controls"><div class="ctl"><span class="ctl-label">Dataset</span><div id="rb-ft-ds"></div></div><div class="ctl"><span class="ctl-label">Y</span><div id="rb-ft-view"></div></div></div>
         <div id="rb-ft-chart"></div>
       </div>
 
       <div data-rb-tab="new" data-title="Newer FMs" hidden>
-        <p class="small" style="color:var(--ink-2)"><span class="tag new">Panopticon · Copernicus-FM</span><br>Copernicus-FM is among the most slimmable models we evaluated. Panopticon is less slimmable but still substantially so. Note: Panopticon's embedding holds more than 66% of its parameters and is not slimmed, which caps how much compute slimming can remove.</p>
+        <p class="small" style="color:var(--ink-2)"><span class="tag new">Panopticon · Copernicus-FM</span><br>Copernicus-FM is among the most slimmable models we evaluated. Panopticon is less slimmable but still substantially so. Note: Panopticon's embedding holds more than 66% of its parameters and is not slimmed, so its compute never drops below 63%.</p>
         <div class="controls"><div class="ctl"><span class="ctl-label">Dataset</span><div id="rb-new-ds"></div></div><div class="ctl"><span class="ctl-label">Protocol</span><div id="rb-new-proto"></div></div><div class="ctl"><span class="ctl-label">Y</span><div id="rb-new-view"></div></div></div>
         <div id="rb-new-chart"></div>
       </div>
@@ -373,7 +373,7 @@
       </div>
 
       <div data-rb-tab="cls" data-title="Class-wise AP" hidden>
-        <p class="small" style="color:var(--ink-2)"><span class="tag new">m-bigearthnet</span><br>Best and worst class (by full-scale AP) per model. Easy classes keep almost all their AP; the hardest lose a larger share than the aggregate mAP but do not fail outright. Aggregate metrics can hide uneven class-wise degradation.</p>
+        <p class="small" style="color:var(--ink-2)"><span class="tag new">m-bigearthnet</span><br>Hardest and easiest class per model (lowest / highest AP averaged over the five widths). Easy classes keep almost all their AP; the hardest lose a larger share than the aggregate mAP but do not fail outright. Aggregate metrics can hide uneven class-wise degradation.</p>
         <div class="controls"><div class="ctl"><span class="ctl-label">Y</span><div id="rb-cls-view"></div></div></div>
         <div id="rb-cls-chart"></div>
       </div>
@@ -385,7 +385,7 @@
     </div>
     <div class="guide reveal">
       <div class="g"><div class="ds">m-brick-kiln</div><div class="meta">binary</div><div class="budget">smallest</div><div class="bar-track"><i style="left:0;width:6%"></i></div><div class="meta" style="margin-top:6px">tolerates the most aggressive slimming</div></div>
-      <div class="g"><div class="ds">m-eurosat</div><div class="meta">10 classes</div><div class="budget">≈1%</div><div class="bar-track"><i style="left:0;width:10%"></i></div><div class="meta" style="margin-top:6px">stable down to about 1% compute</div></div>
+      <div class="g"><div class="ds">m-eurosat</div><div class="meta">10 classes</div><div class="budget">smallest</div><div class="bar-track"><i style="left:0;width:8%"></i></div><div class="meta" style="margin-top:6px">82–95% retention at each model's smallest budget</div></div>
       <div class="g"><div class="ds">m-so2sat</div><div class="meta">17 classes</div><div class="budget">2–10%</div><div class="bar-track"><i style="left:12%;width:22%"></i></div><div class="meta" style="margin-top:6px">needs a few percent of compute</div></div>
       <div class="g"><div class="ds">m-bigearthnet</div><div class="meta">43 labels, multi-label</div><div class="budget">2–10%</div><div class="bar-track"><i style="left:12%;width:22%"></i></div><div class="meta" style="margin-top:6px">needs a few percent of compute</div></div>
     </div>
@@ -428,7 +428,7 @@
           <div class="fig"><span class="yl">Accuracy</span><img src="static/figures/slimmability_by_layer_type_terramind_large_m-eurosat.png" alt="Layer-type ablation, TerraMind large, m-eurosat" loading="lazy"><div class="xl">Rel. compute requirement</div><div class="cap">TerraMind-1.0 (large) · m-eurosat</div></div>
           <div class="fig"><span class="yl">Accuracy</span><img src="static/figures/slimmability_by_layer_type_prithvi2_600_m-eurosat.png" alt="Layer-type ablation, Prithvi 600M, m-eurosat" loading="lazy"><div class="xl">Rel. compute requirement</div><div class="cap">Prithvi-EO-2.0 (600M) · m-eurosat</div></div>
         </div>
-        <p class="fig-caption">MHSA-only slimming cannot go below ≈60% compute; FFN-only reaches ≈35%. Slimming both jointly gives the best retention per FLOP and is the only way to reach ≈1%.</p>
+        <p class="fig-caption">MHSA-only slimming cannot go below ≈65–69% compute; FFN-only reaches ≈34–37%. Slimming both jointly gives the best retention per FLOP and is the only way to reach the 0.8–6.4% range.</p>
       </div>
       <div class="fig-panel" data-id="order" data-title="Dimension order">
         <div class="fig-legend"><img src="static/figures/slimmability_implicit_order_legend_only.png" alt="Legend: first, last, random" loading="lazy"></div>
@@ -437,7 +437,7 @@
           <div class="fig"><span class="yl">Accuracy</span><img src="static/figures/slimmability_implicit_order_terramind.png" alt="Dimension ordering ablation, TerraMind base" loading="lazy"><div class="xl">Rel. compute requirement</div><div class="cap">TerraMind-1.0 (base)</div></div>
           <div class="fig"><span class="yl">Accuracy</span><img src="static/figures/slimmability_implicit_order_prithvi2_300.png" alt="Dimension ordering ablation, Prithvi 300M" loading="lazy"><div class="xl">Rel. compute requirement</div><div class="cap">Prithvi-EO-2.0 (300M)</div></div>
         </div>
-        <p class="fig-caption">Keeping the first, last or a random subset of dimensions (20 draws, 2σ) gives comparable results. Deviations appear only below ≈1% compute and are not consistent across models.</p>
+        <p class="fig-caption">Keeping the first, last or a random subset of dimensions (20 draws, 2σ) gives comparable results: first/last never differ from the random mean by more than 2.8 accuracy points. A few widths fall outside the random 2σ band (e.g. DOFA “last” at 28–76% compute, Prithvi “first” below 1.6%), with no pattern shared across models.</p>
       </div>
       <div class="fig-panel" data-id="knn" data-title="k-NN vs. linear">
         <div class="fig-legend"><img src="static/figures/knn_vs_linear_legend_only.png" alt="Legend: k-NN, linear" loading="lazy"></div>
@@ -521,7 +521,7 @@
 <footer>
   <div class="wrap">
     <span>© 2026 Hackel, Burgert, Demir · BIFOLD / TU Berlin</span>
-    <span>Interactive curves are read from the paper's vector figures. Sentinel-2 patch from BigEarthNet.</span>
+    <span>Interactive curves are computed from the raw result CSVs. Sentinel-2 patch from BigEarthNet.</span>
   </div>
 </footer>
 </body>
