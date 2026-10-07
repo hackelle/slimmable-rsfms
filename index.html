@@ -3,518 +3,526 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <!-- Primary Meta Tags -->
-  <!-- TODO: Replace with your paper title and author names -->
-  <meta name="title" content="PAPER_TITLE - AUTHOR_NAMES">
-  <!-- TODO: Write a compelling 150-160 character description of your research -->
-  <meta name="description" content="BRIEF_DESCRIPTION_OF_YOUR_RESEARCH_CONTRIBUTION_AND_FINDINGS">
-  <!-- TODO: Add 5-10 relevant keywords for your research area -->
-  <meta name="keywords" content="KEYWORD1, KEYWORD2, KEYWORD3, machine learning, computer vision, AI">
-  <!-- TODO: List all authors -->
-  <meta name="author" content="FIRST_AUTHOR_NAME, SECOND_AUTHOR_NAME">
-  <meta name="robots" content="index, follow">
-  <meta name="language" content="English">
-  
-  <!-- Open Graph / Facebook -->
+  <title>Slimmable RS Foundation Models</title>
+  <meta name="description" content="Post-hoc slimming shows that remote sensing foundation models encode task information far more redundantly than computer vision models: most of their width can be removed without retraining. NeurIPS 2026.">
+  <meta name="keywords" content="remote sensing, foundation models, slimmable networks, redundancy, model compression, Earth observation, vision transformer, NeurIPS 2026">
+  <meta name="author" content="Leonard Hackel, Tom Burgert, Begüm Demir">
+  <meta name="theme-color" content="#0b2a2a">
+
+  <!-- Google Scholar -->
+  <meta name="citation_title" content="How Much of a Model Do We Need? Redundancy and Slimmability in Remote Sensing Foundation Models">
+  <meta name="citation_author" content="Hackel, Leonard">
+  <meta name="citation_author" content="Burgert, Tom">
+  <meta name="citation_author" content="Demir, Begüm">
+  <meta name="citation_publication_date" content="2026">
+  <meta name="citation_conference_title" content="Advances in Neural Information Processing Systems (NeurIPS)">
+  <!-- TODO: <meta name="citation_pdf_url" content="https://arxiv.org/pdf/XXXX.XXXXX"> -->
+
+  <!-- Open Graph / Twitter -->
   <meta property="og:type" content="article">
-  <!-- TODO: Replace with your institution or lab name -->
-  <meta property="og:site_name" content="INSTITUTION_OR_LAB_NAME">
-  <!-- TODO: Same as paper title above -->
-  <meta property="og:title" content="PAPER_TITLE">
-  <!-- TODO: Same as description above -->
-  <meta property="og:description" content="BRIEF_DESCRIPTION_OF_YOUR_RESEARCH_CONTRIBUTION_AND_FINDINGS">
-  <!-- TODO: Replace with your actual website URL -->
-  <meta property="og:url" content="https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE">
-  <!-- TODO: Create a 1200x630px preview image and update path -->
-  <meta property="og:image" content="https://YOUR_DOMAIN.com/static/images/social_preview.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="PAPER_TITLE - Research Preview">
-  <meta property="article:published_time" content="2024-01-01T00:00:00.000Z">
-  <meta property="article:author" content="FIRST_AUTHOR_NAME">
-  <meta property="article:section" content="Research">
-  <meta property="article:tag" content="KEYWORD1">
-  <meta property="article:tag" content="KEYWORD2">
-
-  <!-- Twitter -->
+  <meta property="og:title" content="How Much of a Model Do We Need? Redundancy and Slimmability in RS Foundation Models">
+  <meta property="og:description" content="RS foundation models keep most of their accuracy at ~1% of their compute, without retraining. CV models do not. NeurIPS 2026.">
+  <meta property="og:url" content="https://hackelle.github.io/slimmable-rsfms/">
+  <!-- TODO: add a 1200x630 preview image: <meta property="og:image" content="https://hackelle.github.io/slimmable-rsfms/static/images/social_preview.png"> -->
   <meta name="twitter:card" content="summary_large_image">
-  <!-- TODO: Replace with your lab/institution Twitter handle -->
-  <meta name="twitter:site" content="@YOUR_TWITTER_HANDLE">
-  <!-- TODO: Replace with first author's Twitter handle -->
-  <meta name="twitter:creator" content="@AUTHOR_TWITTER_HANDLE">
-  <!-- TODO: Same as paper title above -->
-  <meta name="twitter:title" content="PAPER_TITLE">
-  <!-- TODO: Same as description above -->
-  <meta name="twitter:description" content="BRIEF_DESCRIPTION_OF_YOUR_RESEARCH_CONTRIBUTION_AND_FINDINGS">
-  <!-- TODO: Same as social preview image above -->
-  <meta name="twitter:image" content="https://YOUR_DOMAIN.com/static/images/social_preview.png">
-  <meta name="twitter:image:alt" content="PAPER_TITLE - Research Preview">
 
-  <!-- Academic/Research Specific -->
-  <meta name="citation_title" content="PAPER_TITLE">
-  <meta name="citation_author" content="FIRST_AUTHOR_LAST, FIRST_AUTHOR_FIRST">
-  <meta name="citation_author" content="SECOND_AUTHOR_LAST, SECOND_AUTHOR_FIRST">
-  <meta name="citation_publication_date" content="2024">
-  <meta name="citation_conference_title" content="CONFERENCE_NAME">
-  <meta name="citation_pdf_url" content="https://YOUR_DOMAIN.com/static/pdfs/paper.pdf">
-  
-  <!-- Additional SEO -->
-  <meta name="theme-color" content="#2563eb">
-  <meta name="msapplication-TileColor" content="#2563eb">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  
-  <!-- Preconnect for performance -->
+  <link rel="icon" href="static/images/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://ajax.googleapis.com">
-  <link rel="preconnect" href="https://documentcloud.adobe.com">
-  <link rel="preconnect" href="https://cdn.jsdelivr.net">
-
-
-  <!-- TODO: Replace with your paper title and authors -->
-  <title>PAPER_TITLE - AUTHOR_NAMES | Academic Research</title>
-  
-  <!-- Favicon and App Icons -->
-  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
-  <link rel="apple-touch-icon" href="static/images/favicon.ico">
-  
-  <!-- Critical CSS - Load synchronously -->
-  <link rel="stylesheet" href="static/css/bulma.min.css">
-  <link rel="stylesheet" href="static/css/index.css">
-  
-  <!-- Non-critical CSS - Load asynchronously -->
-  <link rel="preload" href="static/css/bulma-carousel.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <link rel="preload" href="static/css/bulma-slider.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <link rel="preload" href="static/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  
-  <!-- Fallback for browsers that don't support preload -->
-  <noscript>
-    <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
-    <link rel="stylesheet" href="static/css/bulma-slider.min.css">
-    <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  </noscript>
-  
-  <!-- Fonts - Optimized loading -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
-  <!-- Defer non-critical JavaScript -->
-  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script defer src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
-  <script defer src="static/js/fontawesome.all.min.js"></script>
-  <script defer src="static/js/bulma-carousel.min.js"></script>
-  <script defer src="static/js/bulma-slider.min.js"></script>
-  <script defer src="static/js/index.js"></script>
-  
-  <!-- Structured Data for Academic Papers -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,600;0,8..60,700;1,8..60,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="static/vendor/katex/katex.min.css">
+  <link rel="stylesheet" href="static/css/site.css">
+  <script defer src="static/vendor/katex/katex.min.js"></script>
+  <script defer src="static/vendor/katex/contrib/auto-render.min.js"></script>
+  <script defer src="static/js/data.js"></script>
+  <script defer src="static/js/charts.js"></script>
+  <script defer src="static/js/arch.js"></script>
+  <script defer src="static/js/main.js"></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "ScholarlyArticle",
-    "headline": "PAPER_TITLE",
-    "description": "BRIEF_DESCRIPTION_OF_YOUR_RESEARCH_CONTRIBUTION_AND_FINDINGS",
+    "headline": "How Much of a Model Do We Need? Redundancy and Slimmability in Remote Sensing Foundation Models",
     "author": [
-      {
-        "@type": "Person",
-        "name": "FIRST_AUTHOR_NAME",
-        "affiliation": {
-          "@type": "Organization",
-          "name": "INSTITUTION_NAME"
-        }
-      },
-      {
-        "@type": "Person",
-        "name": "SECOND_AUTHOR_NAME",
-        "affiliation": {
-          "@type": "Organization",
-          "name": "INSTITUTION_NAME"
-        }
-      }
+      {"@type": "Person", "name": "Leonard Hackel", "affiliation": "BIFOLD / TU Berlin"},
+      {"@type": "Person", "name": "Tom Burgert", "affiliation": "BIFOLD / TU Berlin"},
+      {"@type": "Person", "name": "Begüm Demir", "affiliation": "BIFOLD / TU Berlin"}
     ],
-    "datePublished": "2024-01-01",
-    "publisher": {
-      "@type": "Organization",
-      "name": "CONFERENCE_OR_JOURNAL_NAME"
-    },
-    "url": "https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE",
-    "image": "https://YOUR_DOMAIN.com/static/images/social_preview.png",
-    "keywords": ["KEYWORD1", "KEYWORD2", "KEYWORD3", "machine learning", "computer vision"],
-    "abstract": "FULL_ABSTRACT_TEXT_HERE",
-    "citation": "BIBTEX_CITATION_HERE",
-    "isAccessibleForFree": true,
-    "license": "https://creativecommons.org/licenses/by/4.0/",
-    "mainEntity": {
-      "@type": "WebPage",
-      "@id": "https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE"
-    },
-    "about": [
-      {
-        "@type": "Thing",
-        "name": "RESEARCH_AREA_1"
-      },
-      {
-        "@type": "Thing", 
-        "name": "RESEARCH_AREA_2"
-      }
-    ]
-  }
-  </script>
-  
-  <!-- Website/Organization Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "INSTITUTION_OR_LAB_NAME",
-    "url": "https://YOUR_INSTITUTION_WEBSITE.com",
-    "logo": "https://YOUR_DOMAIN.com/static/images/favicon.ico",
-    "sameAs": [
-      "https://twitter.com/YOUR_TWITTER_HANDLE",
-      "https://github.com/YOUR_GITHUB_USERNAME"
-    ]
+    "datePublished": "2026",
+    "publisher": {"@type": "Organization", "name": "NeurIPS 2026"},
+    "license": "https://creativecommons.org/licenses/by/4.0/"
   }
   </script>
 </head>
 <body>
 
-
-  <!-- Scroll to Top Button -->
-  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
-    <i class="fas fa-chevron-up"></i>
-  </button>
-
-  <!-- More Works Dropdown -->
-  <div class="more-works-container">
-    <button class="more-works-btn" onclick="toggleMoreWorks()" title="View More Works from Our Lab">
-      <i class="fas fa-flask"></i>
-      More Works
-      <i class="fas fa-chevron-down dropdown-arrow"></i>
+<nav class="nav" aria-label="Sections">
+  <div class="wrap">
+    <a class="brand" href="#top">Slimmable RS FMs</a>
+    <div class="links">
+      <a href="#overview">Overview</a>
+      <a href="#method">Method</a>
+      <a href="#results">Results</a>
+      <a href="#learned">Learned slimming</a>
+      <a href="#why">Why?</a>
+      <a href="#new">New analyses</a>
+      <a href="#ablations">Ablations</a>
+      <a href="#code">Code</a>
+      <a href="#cite">Cite</a>
+    </div>
+    <button class="theme-btn" id="theme-btn" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
     </button>
-    <div class="more-works-dropdown" id="moreWorksDropdown">
-      <div class="dropdown-header">
-        <h4>More Works from Our Lab</h4>
-        <button class="close-btn" onclick="toggleMoreWorks()">
-          <i class="fas fa-times"></i>
-        </button>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <span class="venue"><span class="dot"></span>NeurIPS 2026 · Sydney · Poster</span>
+    <h1><span class="q">How Much of a Model Do We Need?</span><br>Redundancy and Slimmability in Remote Sensing Foundation Models</h1>
+    <p class="subtitle">Cut the width of a pretrained remote sensing foundation model to about 1% of its compute, with no retraining, and it still keeps most of its accuracy. Computer vision models don't.</p>
+    <div class="authors"><!-- TODO: add personal page links -->
+      <span>Leonard Hackel<sup>*</sup></span>
+      <span>Tom Burgert</span>
+      <span>Begüm Demir</span>
+    </div>
+    <div class="affil">BIFOLD &amp; Technische Universität Berlin · <sup>*</sup>corresponding author</div>
+    <div class="btns">
+      <!-- TODO: replace hrefs once available and remove the "pending" class -->
+      <a class="btn pending" href="#" title="Link coming soon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg>Paper
+      </a>
+      <a class="btn ghost pending" href="#" title="Link coming soon">arXiv</a>
+      <a class="btn ghost pending" href="#" title="Link coming soon">OpenReview</a>
+      <a class="btn ghost pending" href="#" title="Code release coming soon">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 12 .5z"/></svg>Code
+      </a>
+      <a class="btn ghost" href="#cite">BibTeX</a>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- ================= OVERVIEW ================= -->
+<section id="overview" style="padding-top:0">
+  <div class="wrap">
+    <div class="tldr reveal"><b>TL;DR.</b> We uniformly shrink the width of every transformer block in eight pretrained remote sensing (RS) foundation models (FMs) and evaluate them on classification, segmentation and change detection. RS FMs degrade gracefully, while MAE and DINOv2 trained on natural images collapse over the same compute range. Feature correlation, explained variance and effective dimensionality show why: task-relevant information is encoded redundantly in few directions.</div>
+
+    <div class="stats reveal">
+      <div class="stat"><div class="v">8 <small>+2</small></div><div class="l">RS FMs from 23M to 631M parameters; Panopticon and Copernicus-FM added for the camera-ready</div></div>
+      <div class="stat"><div class="v">7</div><div class="l">downstream datasets covering scene classification, semantic segmentation and change detection</div></div>
+      <div class="stat hl"><div class="v">≈86%</div><div class="l">mean relative accuracy of RS FMs at the smallest compute budget (4 classification datasets)</div></div>
+      <div class="stat warm"><div class="v">12–35%</div><div class="l">what CV MAE and DINOv2 keep on ImageNet subsets at the same budget</div></div>
+    </div>
+
+    <div class="grid-2 reveal" style="margin-top:28px">
+      <div class="card chart-card">
+        <div class="chart-title">a) Relative retention: RS FMs vs. CV models</div>
+        <div class="chart-sub">Legend: “model(s) @ evaluation data”. Hover for values.</div>
+        <div id="chart-fig1a"></div>
       </div>
-      <div class="works-list">
-        <!-- TODO: Replace with your lab's related works -->
-        <a href="https://arxiv.org/abs/PAPER_ID_1" class="work-item" target="_blank">
-          <div class="work-info">
-            <!-- TODO: Replace with actual paper title -->
-            <h5>Paper Title 1</h5>
-            <!-- TODO: Replace with brief description -->
-            <p>Brief description of the work and its main contribution.</p>
-            <!-- TODO: Replace with venue and year -->
-            <span class="work-venue">Conference/Journal 2024</span>
+      <div class="card chart-card">
+        <div class="chart-title">b) Same evaluation data: m-eurosat</div>
+        <div class="chart-sub">A CV MAE evaluated directly on RS data narrows the gap, but does not close it.</div>
+        <div id="chart-fig1b"></div>
+      </div>
+    </div>
+    <p class="muted small" style="margin-top:12px">Figure 1 of the paper, interactive. Moving the CV MAE from ImageNet to m-eurosat lifts its retention at the smallest budget from 12–35% to 76%, still below the 82–96% of RS FMs. Both the evaluation domain and RS-specific pretraining contribute.</p>
+
+    <div class="grid-2 reveal" style="margin-top:44px; align-items:start">
+      <div>
+        <span class="eyebrow">Abstract</span>
+        <div class="abstract" style="columns:auto">
+          <p>Large-scale foundation models (FMs) in remote sensing (RS) are developed following paradigms established in computer vision (CV), yet the validity of transferring CV scaling laws to RS has not been systematically examined. We hypothesize that RS FMs enter an overparameterized regime at substantially smaller scales than their CV counterparts, with task-relevant information encoded redundantly across model dimensions.</p>
+          <p>To test this hypothesis, we apply <em>post-hoc slimmability</em>, uniform width reduction of pretrained encoder transformer blocks, as a tool to measure representational redundancy across eight state-of-the-art RS FMs on classification, segmentation, and change detection tasks. RS FMs retain 69–109% relative accuracy on RS datasets under aggressive width reduction, while MAE and DINOv2 pretrained on natural images degrade sharply on ImageNet subsets of matched class count over the same range of computational requirements. A CV MAE evaluated directly on the same RS datasets narrows but does not close the gap, indicating that both dataset characteristics and domain-specific pretraining contribute.</p>
+          <p>Mechanistic analyses such as feature correlation, explained variance, and effective dimensionality indicate that task-relevant variance concentrates in few principal components and is redundantly encoded across model dimensions. We further show that learned slimmable training improves over post-hoc slimmability for contrastive objectives, while reconstruction-based objectives do not benefit from current slimmable training protocols. Our findings establish post-hoc slimming as a practical deployment strategy for resource-constrained RS applications and as a diagnostic tool for representational redundancy in RS FMs.</p>
+        </div>
+      </div>
+      <div>
+        <span class="eyebrow">Key findings</span>
+        <div class="findings">
+          <div class="finding"><p><b>RS FMs are highly slimmable.</b> At their smallest compute budget, most models keep more than 80% of their full-scale accuracy on classification. Segmentation and change detection are even more robust.</p></div>
+          <div class="finding"><p><b>The gap to CV is real, not an artefact of class count.</b> CV MAE and DINOv2 collapse on ImageNet subsets with the same number of classes. On the same RS data, a CV MAE still degrades faster than RS FMs.</p></div>
+          <div class="finding"><p><b>Smaller can be better.</b> Intermediate widths often match or beat the full model, consistent with redundant dimensions acting as noise for the task.</p></div>
+          <div class="finding"><p><b>Learned slimming helps contrastive, not reconstructive, pretraining.</b> Slimmable MoCo improves at low budgets; slimmable MAE does not benefit under current protocols.</p></div>
+          <div class="finding"><p><b>Redundancy is visible in the features.</b> Slimmed representations concentrate variance in few, highly correlated directions, and this suffices for the downstream task.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= METHOD ================= -->
+<section id="method" class="alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Method</span>
+      <h2>Post-hoc slimming: one knob, no retraining</h2>
+      <p>We take a released checkpoint and keep only a fraction <i>s</i> of the hidden width in every block: the first ⌊<i>s·d<sub>k</sub></i>⌋ dimensions of each attention head and the first ⌊<i>s·d<sub>h</sub></i>⌋ units of each feed-forward layer. The method is deliberately simple. If a sophisticated compression method preserved accuracy, it would be unclear whether that reflects the method or the model. If naive slimming preserves accuracy, it tells us something about the model.</p>
+    </div>
+    <div class="arch-layout reveal">
+      <div class="card arch">
+        <div id="arch-svg"></div>
+        <div class="slider-box">
+          <div class="slider-row">
+            <span class="sval" id="s-val">s = 0.25</span>
+            <input type="range" id="s-slider" min="0" max="30" step="1" aria-label="Width factor s (31 evaluated values)">
           </div>
-          <i class="fas fa-external-link-alt"></i>
-        </a>
-        <!-- TODO: Add more related works or remove extra items -->
-        <a href="https://arxiv.org/abs/PAPER_ID_2" class="work-item" target="_blank">
-          <div class="work-info">
-            <h5>Paper Title 2</h5>
-            <p>Brief description of the work and its main contribution.</p>
-            <span class="work-venue">Conference/Journal 2023</span>
-          </div>
-          <i class="fas fa-external-link-alt"></i>
-        </a>
-        <a href="https://arxiv.org/abs/PAPER_ID_3" class="work-item" target="_blank">
-          <div class="work-info">
-            <h5>Paper Title 3</h5>
-            <p>Brief description of the work and its main contribution.</p>
-            <span class="work-venue">Conference/Journal 2023</span>
-          </div>
-          <i class="fas fa-external-link-alt"></i>
-        </a>
+          <div class="ticks-row"><span>0.001</span><span>0.01</span><span>0.1</span><span>1.0</span></div>
+          <p class="muted small" style="margin:8px 0 0">Hover over (or tab to) any part of the figure for details. The slider steps through the 31 widths we evaluate.</p>
+        </div>
+      </div>
+      <aside class="card readout" aria-live="polite">
+        <div>
+          <label class="ctl-label" for="arch-preset">Backbone</label>
+          <select id="arch-preset">
+            <option value="s">ViT-S/16 (e.g. SSL4EO ViT-S)</option>
+            <option value="b">ViT-B/16 (e.g. DOFA / TerraMind base)</option>
+            <option value="l" selected>ViT-L/16 (e.g. DOFA / TerraMind large, Prithvi 300M)</option>
+            <option value="h">ViT-H/14 (e.g. Prithvi-EO-2.0 600M)</option>
+          </select>
+        </div>
+        <div>
+          <div class="ctl-label">Estimated compute</div>
+          <div class="big" id="ro-flops">–</div>
+          <div class="meter" style="margin-top:8px"><i id="ro-meter"></i></div>
+          <div class="muted small" id="ro-gflops" style="margin-top:6px"></div>
+        </div>
+        <div class="kv"><span>Per-head width d<sub>k</sub>′</span><b id="ro-dk">–</b></div>
+        <div class="kv"><span>FFN hidden width d<sub>h</sub>′</span><b id="ro-dh">–</b></div>
+        <div class="kv"><span>Attention heads kept</span><b id="ro-heads">–</b></div>
+        <div class="kv"><span>Token width d</span><b id="ro-d">–</b></div>
+        <div class="kv"><span>Block parameters active</span><b id="ro-par">–</b></div>
+        <p class="muted small wide" style="margin:0">Estimate for a 224×224 input with 12 bands, counting the patch embedding and all encoder blocks. The patch embedding is never slimmed, which is why compute bottoms out above 0%. Paper results use each model's measured FLOPs.</p>
+      </aside>
+    </div>
+
+    <div class="eqs reveal" style="margin-top:22px">
+      <div class="card">
+        <span class="tag">Slimmable FFN</span>
+        $$\begin{aligned}\mathbf{h} &= \mathrm{Act}\big(\mathbf{x}\,\mathbf{W}_1[{:}d_h',:]^\top + \mathbf{b}_1[{:}d_h']\big)\\ \mathbf{y} &= \mathbf{h}\,\mathbf{W}_2[:,{:}d_h']^\top + \mathbf{b}_2\end{aligned}$$
+        <p class="muted small">with \(d_h' = \max(1, \lfloor s\cdot d_h \rfloor)\), \(s\in(0,1]\).</p>
+      </div>
+      <div class="card">
+        <span class="tag">Slimmable MHSA</span>
+        $$\begin{aligned}\mathcal{I}&=\textstyle\bigcup_{h=1}^{H}\,[h d_k,\,h d_k + d_k')\\ \mathbf{x}_{\text{attn}}&=\mathrm{softmax}\big(\mathbf{Q}\mathbf{K}^\top/\sqrt{d_k'}\,\big)\mathbf{V}\end{aligned}$$
+        <p class="muted small">\(\mathbf{Q},\mathbf{K},\mathbf{V}\) use rows \(\mathcal{I}\) of their projections, the output projection uses columns \(\mathcal{I}\). All \(H\) heads are kept.</p>
       </div>
     </div>
+
+    <div class="grid-3 reveal" style="margin-top:18px">
+      <div class="card"><span class="tag">Evaluation</span><h3>Frozen features, 31 widths</h3><p class="muted small">k-NN (k = 5) or linear probe on penultimate features for classification; a SegFormer-style multi-scale head for segmentation and change detection. Five seeds per experiment.</p></div>
+      <div class="card"><span class="tag">Metrics</span><h3>Relative compute and retention</h3><p class="muted small">Compute = FLOPs at width <i>s</i> / FLOPs at full width. Retention = metric(<i>s</i>) / metric(1.0), so datasets with different absolute scores are comparable.</p></div>
+      <div class="card"><span class="tag">Datasets</span><h3>GEO-Bench + OSCD</h3><p class="muted small">m-brick-kiln, m-eurosat, m-so2sat, m-bigearthnet (classification); m-cashew-plant, m-SA-crop-type (segmentation); OSCD (change detection).</p></div>
+    </div>
   </div>
+</section>
 
-  <main id="main-content">
-  <section class="hero">
-    <div class="hero-body">
-      <div class="container is-max-desktop">
-        <div class="columns is-centered">
-          <div class="column has-text-centered">
-            <!-- TODO: Replace with your paper title -->
-            <h1 class="title is-1 publication-title">Academic Project Page</h1>
-            <div class="is-size-5 publication-authors">
-              <!-- TODO: Replace with your paper authors and their personal links -->
-              <span class="author-block">
-                <a href="FIRST AUTHOR PERSONAL LINK" target="_blank">First Author</a><sup>*</sup>,</span>
-                <span class="author-block">
-                  <a href="SECOND AUTHOR PERSONAL LINK" target="_blank">Second Author</a><sup>*</sup>,</span>
-                  <span class="author-block">
-                    <a href="THIRD AUTHOR PERSONAL LINK" target="_blank">Third Author</a>
-                  </span>
-                  </div>
+<!-- ================= RESULTS ================= -->
+<section id="results">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Results</span>
+      <h2>Eight RS foundation models, seven datasets</h2>
+      <p>DOFA, Prithvi-EO-2.0, TerraMind-1.0 (base and large each) and SSL4EO ViT-S (DINO and MoCo). Each line starts at that model's smallest reachable compute budget, which depends on how much of the model sits in the (unslimmed) patch embedding.</p>
+    </div>
+    <div class="card chart-card reveal">
+      <div class="controls">
+        <div class="ctl"><span class="ctl-label">Dataset</span><div id="ph-ds"></div></div>
+      </div>
+      <div class="controls">
+        <div class="ctl"><span class="ctl-label">Y</span><div id="ph-view"></div></div>
+        <div class="ctl"><span class="ctl-label">X axis</span><div id="ph-x"></div></div>
+        <div class="ctl muted small">Retention at each model's smallest budget: <b id="ph-stat" style="color:var(--ink);margin-left:4px">–</b></div>
+      </div>
+      <p id="ph-desc" class="small" style="color:var(--ink-2);margin:0 0 4px"></p>
+      <div id="ph-chart"></div>
+    </div>
+    <div class="grid-3 reveal" style="margin-top:18px">
+      <div class="card"><span class="tag">Classification</span><p class="small muted">Task complexity sets the threshold: m-eurosat is stable down to the smallest budget, m-bigearthnet needs about 2–10% compute.</p></div>
+      <div class="card"><span class="tag">Dense prediction</span><p class="small muted">Segmentation and change detection are even more robust. On m-cashew-plant the curves are practically flat.</p></div>
+      <div class="card"><span class="tag">Architectures</span><p class="small muted">Larger variants degrade more smoothly. Prithvi holds up best at extreme slimming; DOFA shows the strongest non-monotonic peaks.</p></div>
+    </div>
+  </div>
+</section>
 
-                  <div class="is-size-5 publication-authors">
-                    <!-- TODO: Replace with your institution and conference/journal info -->
-                    <span class="author-block">Institution Name<br>Conference name and year</span>
-                    <!-- TODO: Remove this line if no equal contribution -->
-                    <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
-                  </div>
+<!-- ================= LEARNED ================= -->
+<section id="learned" class="alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Learned vs. post-hoc</span>
+      <h2>Does training for slimmability help?</h2>
+      <p>We pretrain ViT-Base models from scratch with MoCo and with MAE, once regularly and once with slimmable training (full, minimal and three random widths per step, with distillation from the full network). Then we slim all four post hoc.</p>
+    </div>
+    <div class="card chart-card reveal">
+      <div class="controls">
+        <div class="ctl"><span class="ctl-label">Dataset</span><div id="nv-ds"></div></div>
+        <div class="ctl"><span class="ctl-label">Y</span><div id="nv-view"></div></div>
+        <div class="ctl"><span class="ctl-label">X axis</span><div id="nv-x"></div></div>
+      </div>
+      <p id="nv-desc" class="small" style="color:var(--ink-2);margin:0 0 4px"></p>
+      <div id="nv-chart"></div>
+    </div>
+    <div class="grid-2 reveal" style="margin-top:18px">
+      <div class="card"><span class="tag">MoCo ✓</span><p class="small muted" style="margin:0">Explicit multi-width optimisation makes contrastive representations more robust to width reduction without sacrificing peak performance.</p></div>
+      <div class="card"><span class="tag warm">MAE ✗</span><p class="small muted" style="margin:0">No established slimmable protocol exists for reconstruction objectives, and the contrastive recipe does not transfer. This remains an open problem.</p></div>
+    </div>
+  </div>
+</section>
 
-                  <div class="column has-text-centered">
-                    <div class="publication-links">
-                         <!-- TODO: Update with your arXiv paper ID -->
-                      <span class="link-block">
-                        <a href="https://arxiv.org/pdf/<ARXIV PAPER ID>.pdf" target="_blank"
-                        class="external-link button is-normal is-rounded is-dark">
-                        <span class="icon">
-                          <i class="fas fa-file-pdf"></i>
-                        </span>
-                        <span>Paper</span>
-                      </a>
-                    </span>
+<!-- ================= WHY ================= -->
+<section id="why">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Representational analysis</span>
+      <h2>Why does slimming work?</h2>
+      <p>Three descriptive measures of the frozen features at each width. They give mechanistic intuition, not a causal proof.</p>
+    </div>
+    <div class="grid-3 reveal">
+      <div class="card">
+        <span class="tag">Mean feature correlation</span>
+        <p class="small">Average absolute correlation between feature dimensions, over the strictly upper triangle of the correlation matrix (self-correlations excluded).</p>
+        $$\mathrm{MFC}=\tfrac{2}{D(D-1)}\textstyle\sum_{i&lt;j}\lvert\mathrm{corr}(\mathbf{e}_i,\mathbf{e}_j)\rvert$$
+        <p class="muted small">High = dimensions are redundant copies of each other.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Explained variance ratio</span>
+        <p class="small">Share of variance per principal component of the mean-centred features. We report the slope of log EVR against log component index.</p>
+        $$\mathrm{EVR}_i=\lambda_i\big/\textstyle\sum_j\lambda_j$$
+        <p class="muted small">Steeper (more negative) = variance concentrated in fewer components.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Effective dimensionality</span>
+        <p class="small">Participation ratio of the covariance eigenvalues: how many dimensions carry independent variance.</p>
+        $$d_{\text{eff}}=\big(\textstyle\sum_i\lambda_i\big)^2\big/\textstyle\sum_i\lambda_i^2$$
+        <p class="muted small">Low = information lives in a few directions.</p>
+      </div>
+    </div>
 
-                    <!-- TODO: Add your supplementary material PDF or remove this section -->
-                    <span class="link-block">
-                      <a href="static/pdfs/supplementary_material.pdf" target="_blank"
-                      class="external-link button is-normal is-rounded is-dark">
-                      <span class="icon">
-                        <i class="fas fa-file-pdf"></i>
-                      </span>
-                      <span>Supplementary</span>
-                    </a>
-                  </span>
-
-                  <!-- TODO: Replace with your GitHub repository URL -->
-                  <span class="link-block">
-                    <a href="https://github.com/YOUR REPO HERE" target="_blank"
-                    class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                      <i class="fab fa-github"></i>
-                    </span>
-                    <span>Code</span>
-                  </a>
-                </span>
-
-                <!-- TODO: Update with your arXiv paper ID -->
-                <span class="link-block">
-                  <a href="https://arxiv.org/abs/<ARXIV PAPER ID>" target="_blank"
-                  class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                    <i class="ai ai-arxiv"></i>
-                  </span>
-                  <span>arXiv</span>
-                </a>
-              </span>
-            </div>
-          </div>
+    <div class="card reveal" style="margin-top:18px">
+      <div class="fig-tabs" data-figtabs></div>
+      <div class="fig-panel" data-id="corr" data-title="Feature correlation">
+        <div class="fig-legend"><img src="static/figures/corr_some_ds_legend_only.png" alt="Legend: m-eurosat, m-bigearthnet" loading="lazy"></div>
+        <div class="fig-row c3">
+          <div class="fig"><span class="yl">Mean feat. corr.</span><img src="static/figures/corr_dofa_large_some_ds.png" alt="Mean feature correlation vs compute, DOFA large" loading="lazy"><div class="xl">Rel. compute requirement</div><div class="cap">DOFA (large)</div></div>
+          <div class="fig"><span class="yl">Mean feat. corr.</span><img src="static/figures/corr_terramind_large_some_ds.png" alt="Mean feature correlation vs compute, TerraMind-1.0 large" loading="lazy"><div class="xl">Rel. compute requirement</div><div class="cap">TerraMind-1.0 (large)</div></div>
+          <div class="fig"><span class="yl">Mean feat. corr.</span><img src="static/figures/corr_prithvi2_600_some_ds.png" alt="Mean feature correlation vs compute, Prithvi-EO-2.0 600M" loading="lazy"><div class="xl">Rel. compute requirement</div><div class="cap">Prithvi-EO-2.0 (600M)</div></div>
         </div>
+        <p class="fig-caption">At the smallest budget, correlation is high for all three large models (≈0.56 for DOFA on m-eurosat) and falls as width grows.</p>
+      </div>
+      <div class="fig-panel" data-id="evr" data-title="EVR slope">
+        <div class="fig-legend"><img src="static/figures/evr_legend_only.png" alt="Legend: DOFA large, Prithvi-EO-2.0 600M, TerraMind-1.0 large" loading="lazy"></div>
+        <div class="fig-row" style="max-width:620px;margin:0 auto">
+          <div class="fig"><span class="yl">Slope of the EVR</span><img src="static/figures/evr_slope_all_datasets_nolegend_large.png" alt="Log-log slope of the explained variance ratio vs compute" loading="lazy"><div class="xl">Rel. compute requirement</div></div>
+        </div>
+        <p class="fig-caption">Log-log EVR slopes averaged over four classification datasets. DOFA steepens monotonically toward small widths (≈ −3.1); TerraMind stays flat until the smallest budget; Prithvi is non-monotonic.</p>
+      </div>
+      <div class="fig-panel" data-id="eff" data-title="Effective dimension">
+        <div class="fig-legend"><img src="static/figures/eff_dim_ds_legend_only.png" alt="Legend: datasets" loading="lazy"><img src="static/figures/eff_dim_scale_legend_only.png" alt="Legend: scale" loading="lazy"></div>
+        <div class="fig-row c3">
+          <div class="fig"><span class="yl">Rel. retention rate</span><img src="static/figures/eff_dim_dofa_large.png" alt="Retention vs effective dimension, DOFA large" loading="lazy"><div class="xl">Effective dimension</div><div class="cap">DOFA (large)</div></div>
+          <div class="fig"><span class="yl">Rel. retention rate</span><img src="static/figures/eff_dim_terramind_large.png" alt="Retention vs effective dimension, TerraMind-1.0 large" loading="lazy"><div class="xl">Effective dimension</div><div class="cap">TerraMind-1.0 (large)</div></div>
+          <div class="fig"><span class="yl">Rel. retention rate</span><img src="static/figures/eff_dim_prithvi2_600.png" alt="Retention vs effective dimension, Prithvi-EO-2.0 600M" loading="lazy"><div class="xl">Effective dimension</div><div class="cap">Prithvi-EO-2.0 (600M)</div></div>
+        </div>
+        <p class="fig-caption">DOFA needs many independent dimensions at full scale (up to 34 on m-bigearthnet) and slimming removes them. Prithvi keeps 90–100% retention while its effective dimension varies by more than 2.5×.</p>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top:18px">
+      <details class="acc"><summary>DOFA (large): monotonic</summary><div class="acc-body">All three measures change monotonically with width: correlation drops to near zero, the EVR slope rises from ≈ −3.1 to ≈ −1.1, and effective dimension grows to 34. Retention tracks effective dimension closely, so this model needs many independent dimensions at full scale.</div></details>
+      <details class="acc"><summary>TerraMind-1.0 (large): saturating</summary><div class="acc-body">Effective dimension rises from ≈3.6 to ≈5.7 by 40% compute and then plateaus; the EVR slope is flat over most of the range. Once a moderate budget is reached, the model keeps a consistent representational strategy.</div></details>
+      <details class="acc"><summary>Prithvi-EO-2.0 (600M): decoupled</summary><div class="acc-body">Correlation and EVR slope are non-monotonic, and effective dimension peaks around 40–50% compute before dropping sharply, while retention stays within 90–100% throughout. We considered incomplete pretraining convergence as an explanation, but could not verify it (no loss curves were available), so we leave it as an explicitly untested hypothesis.</div></details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= NEW (REBUTTAL) ================= -->
+<section id="new" class="alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Beyond the submission</span>
+      <h2>New analyses in the camera-ready</h2>
+      <p>Experiments added during the review process. They test whether the redundancy is an artefact of frozen features, model selection, geography or class balance.</p>
+    </div>
+    <div class="card chart-card reveal">
+      <div class="controls"><div id="rb-tabs"></div></div>
+
+      <div data-rb-tab="ft" data-title="Full fine-tuning">
+        <p class="small" style="color:var(--ink-2)"><span class="tag new">Fine-tuning</span><br>Full fine-tuning (LR 3e-3, 40 epochs) raises absolute performance, but the accuracy-vs-width curves keep their shape. The redundancy is not an artefact of the frozen-feature protocol.</p>
+        <div class="controls"><div class="ctl"><span class="ctl-label">Dataset</span><div id="rb-ft-ds"></div></div><div class="ctl"><span class="ctl-label">Y</span><div id="rb-ft-view"></div></div></div>
+        <div id="rb-ft-chart"></div>
+      </div>
+
+      <div data-rb-tab="new" data-title="Newer FMs" hidden>
+        <p class="small" style="color:var(--ink-2)"><span class="tag new">Panopticon · Copernicus-FM</span><br>Copernicus-FM is among the most slimmable models we evaluated. Panopticon is less slimmable but still substantially so. Note: Panopticon's embedding holds more than 66% of its parameters and is not slimmed, which caps how much compute slimming can remove.</p>
+        <div class="controls"><div class="ctl"><span class="ctl-label">Dataset</span><div id="rb-new-ds"></div></div><div class="ctl"><span class="ctl-label">Protocol</span><div id="rb-new-proto"></div></div><div class="ctl"><span class="ctl-label">Y</span><div id="rb-new-view"></div></div></div>
+        <div id="rb-new-chart"></div>
+      </div>
+
+      <div data-rb-tab="geo" data-title="Geographic shift" hidden>
+        <p class="small" style="color:var(--ink-2)"><span class="tag new">m-so2sat</span><br>GEO-Bench's Cultural-10 split uses geographically disjoint train and test cities. A random split (five draws, same sizes) gives much higher retention, e.g. ≈0.93 vs ≈0.74 for DOFA (base) at the smallest budget. Distribution shift reduces redundancy, but a lot of it survives.</p>
+        <div class="controls"><div class="ctl"><span class="ctl-label">Y</span><div id="rb-geo-view"></div></div></div>
+        <div id="rb-geo-chart"></div>
+      </div>
+
+      <div data-rb-tab="imb" data-title="Class imbalance" hidden>
+        <p class="small" style="color:var(--ink-2)"><span class="tag new">m-eurosat</span><br>Exponential class imbalance (class 0 keeps all samples, class 9 is subsampled down to the given ratio; five seeds). Accuracy drops at every width, but the curves stay roughly parallel: slimming does not interact strongly with imbalance.</p>
+        <div class="controls"><div class="ctl"><span class="ctl-label">Model</span><div id="rb-imb-m"></div></div><div class="ctl"><span class="ctl-label">Y</span><div id="rb-imb-view"></div></div></div>
+        <div id="rb-imb-chart"></div>
+      </div>
+
+      <div data-rb-tab="cls" data-title="Class-wise AP" hidden>
+        <p class="small" style="color:var(--ink-2)"><span class="tag new">m-bigearthnet</span><br>Best and worst class (by full-scale AP) per model. Easy classes keep almost all their AP; the hardest lose a larger share than the aggregate mAP but do not fail outright. Aggregate metrics can hide uneven class-wise degradation.</p>
+        <div class="controls"><div class="ctl"><span class="ctl-label">Y</span><div id="rb-cls-view"></div></div></div>
+        <div id="rb-cls-chart"></div>
+      </div>
+    </div>
+
+    <div class="section-head reveal" style="margin-top:56px">
+      <h2 style="font-size:1.5rem">Choosing a deployment width</h2>
+      <p>With a labelled training set, pick the width by 5-fold cross-validation. Without one, label-space complexity, known in advance, is a reasonable first guess for where accuracy starts to fall off.</p>
+    </div>
+    <div class="guide reveal">
+      <div class="g"><div class="ds">m-brick-kiln</div><div class="meta">binary</div><div class="budget">smallest</div><div class="bar-track"><i style="left:0;width:6%"></i></div><div class="meta" style="margin-top:6px">tolerates the most aggressive slimming</div></div>
+      <div class="g"><div class="ds">m-eurosat</div><div class="meta">10 classes</div><div class="budget">≈1%</div><div class="bar-track"><i style="left:0;width:10%"></i></div><div class="meta" style="margin-top:6px">stable down to about 1% compute</div></div>
+      <div class="g"><div class="ds">m-so2sat</div><div class="meta">17 classes</div><div class="budget">2–10%</div><div class="bar-track"><i style="left:12%;width:22%"></i></div><div class="meta" style="margin-top:6px">needs a few percent of compute</div></div>
+      <div class="g"><div class="ds">m-bigearthnet</div><div class="meta">43 labels, multi-label</div><div class="budget">2–10%</div><div class="bar-track"><i style="left:12%;width:22%"></i></div><div class="meta" style="margin-top:6px">needs a few percent of compute</div></div>
+    </div>
+
+    <div class="grid-2 reveal" style="margin-top:56px">
+      <div>
+        <h2 style="font-size:1.5rem;margin-bottom:12px">Why might RS FMs differ?</h2>
+        <p class="muted small">Three plausible, non-exclusive explanations. We did not test them directly.</p>
+        <details class="acc"><summary>Lower-level features suffice</summary><div class="acc-body">RS models rely mostly on low- and mid-level features (spectral signatures, textures, local layouts), while CV models rely more on high-level semantics such as global shape. If a task is solvable from lower-level cues, extra capacity mostly adds redundancy.</div></details>
+        <details class="acc"><summary>Fewer nuisance factors</summary><div class="acc-body">Satellite images are acquired under fairly standardised viewing geometries and sensors. Natural images vary far more in viewpoint, pose, illumination and occlusion. Learning fewer invariances may need less capacity.</div></details>
+        <details class="acc"><summary>Benchmarks may be too easy</summary><div class="acc-body">Current RS benchmarks may not stress modern FMs. Class count alone does not explain the gap (CV models stay less slimmable on ImageNet subsets with matched class count), but harder temporal, multi-modal or geospatial reasoning tasks could show larger benefits from scale.</div></details>
+      </div>
+      <div>
+        <h2 style="font-size:1.5rem;margin-bottom:12px">Scope and limitations</h2>
+        <ul class="checklist">
+          <li>Findings describe post-hoc width redundancy of the evaluated checkpoints, not a general scaling law for RS FMs.</li>
+          <li>Read relative retention together with absolute performance, especially for safety-critical uses.</li>
+          <li>Redundancy shrinks under geographic distribution shift, and aggregate metrics can mask class-wise degradation.</li>
+          <li>All models are ViT-based and pretrained on optical Sentinel-2 data. SAR, CNN, hybrid, state-space and generative models (e.g. DiffusionSat) remain open.</li>
+          <li>Complementary to scaling studies that pretrain one model per size (e.g. Dionelis et al., 2025): we ask how much of an already trained model is load-bearing.</li>
+        </ul>
       </div>
     </div>
   </div>
 </section>
 
-
-<!-- Teaser video-->
-<section class="hero teaser">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <!-- TODO: Replace with your teaser video -->
-      <video poster="" id="tree" autoplay controls muted loop height="100%" preload="metadata">
-        <!-- TODO: Add your video file path here -->
-        <source src="static/videos/banner_video.mp4" type="video/mp4">
-      </video>
-      <!-- TODO: Replace with your video description -->
-      <h2 class="subtitle has-text-centered">
-        Aliquam vitae elit ullamcorper tellus egestas pellentesque. Ut lacus tellus, maximus vel lectus at, placerat pretium mi. Maecenas dignissim tincidunt vestibulum. Sed consequat hendrerit nisl ut maximus. 
-      </h2>
+<!-- ================= ABLATIONS ================= -->
+<section id="ablations">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Ablations</span>
+      <h2>Sanity checks from the appendix</h2>
     </div>
-  </div>
-</section>
-<!-- End teaser video -->
-
-<!-- Paper abstract -->
-<section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
-          <!-- TODO: Replace with your paper abstract -->
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ullamcorper tellus sed ante aliquam tempus. Etiam porttitor urna feugiat nibh elementum, et tempor dolor mattis. Donec accumsan enim augue, a vulputate nisi sodales sit amet. Proin bibendum ex eget mauris cursus euismod nec et nibh. Maecenas ac gravida ante, nec cursus dui. Vivamus purus nibh, placerat ac purus eget, sagittis vestibulum metus. Sed vestibulum bibendum lectus gravida commodo. Pellentesque auctor leo vitae sagittis suscipit.
-          </p>
+    <div class="card reveal">
+      <div class="fig-tabs" data-figtabs></div>
+      <div class="fig-panel" data-id="layer" data-title="Layer type">
+        <div class="fig-legend"><img src="static/figures/slimmability_by_layer_type_legend_only.png" alt="Legend: slimmable MHSA, slimmable FFN, both" loading="lazy"></div>
+        <div class="fig-row c3">
+          <div class="fig"><span class="yl">Accuracy</span><img src="static/figures/slimmability_by_layer_type_dofa_large_m-eurosat.png" alt="Layer-type ablation, DOFA large, m-eurosat" loading="lazy"><div class="xl">Rel. compute requirement</div><div class="cap">DOFA (large) · m-eurosat</div></div>
+          <div class="fig"><span class="yl">Accuracy</span><img src="static/figures/slimmability_by_layer_type_terramind_large_m-eurosat.png" alt="Layer-type ablation, TerraMind large, m-eurosat" loading="lazy"><div class="xl">Rel. compute requirement</div><div class="cap">TerraMind-1.0 (large) · m-eurosat</div></div>
+          <div class="fig"><span class="yl">Accuracy</span><img src="static/figures/slimmability_by_layer_type_prithvi2_600_m-eurosat.png" alt="Layer-type ablation, Prithvi 600M, m-eurosat" loading="lazy"><div class="xl">Rel. compute requirement</div><div class="cap">Prithvi-EO-2.0 (600M) · m-eurosat</div></div>
         </div>
+        <p class="fig-caption">MHSA-only slimming cannot go below ≈60% compute; FFN-only reaches ≈35%. Slimming both jointly gives the best retention per FLOP and is the only way to reach ≈1%.</p>
       </div>
-    </div>
-  </div>
-</section>
-<!-- End paper abstract -->
-
-
-<!-- Image carousel -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-       <div class="item">
-        <!-- TODO: Replace with your research result images -->
-        <img src="static/images/carousel1.jpg" alt="First research result visualization" loading="lazy"/>
-        <!-- TODO: Replace with description of this result -->
-        <h2 class="subtitle has-text-centered">
-          First image description.
-        </h2>
-      </div>
-      <div class="item">
-        <!-- Your image here -->
-        <img src="static/images/carousel2.jpg" alt="Second research result visualization" loading="lazy"/>
-        <h2 class="subtitle has-text-centered">
-          Second image description.
-        </h2>
-      </div>
-      <div class="item">
-        <!-- Your image here -->
-        <img src="static/images/carousel3.jpg" alt="Third research result visualization" loading="lazy"/>
-        <h2 class="subtitle has-text-centered">
-         Third image description.
-       </h2>
-     </div>
-     <div class="item">
-      <!-- Your image here -->
-      <img src="static/images/carousel4.jpg" alt="Fourth research result visualization" loading="lazy"/>
-      <h2 class="subtitle has-text-centered">
-        Fourth image description.
-      </h2>
-    </div>
-  </div>
-</div>
-</div>
-</section>
-<!-- End image carousel -->
-
-
-
-
-<!-- Youtube video -->
-<section class="hero is-small is-light">
-  <div class="hero-body">
-    <div class="container">
-      <!-- Paper video. -->
-      <h2 class="title is-3">Video Presentation</h2>
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
-          
-          <div class="publication-video">
-            <!-- TODO: Replace with your YouTube video ID -->
-            <iframe src="https://www.youtube.com/embed/JkaxUblCGz0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-          </div>
+      <div class="fig-panel" data-id="order" data-title="Dimension order">
+        <div class="fig-legend"><img src="static/figures/slimmability_implicit_order_legend_only.png" alt="Legend: first, last, random" loading="lazy"></div>
+        <div class="fig-row c3">
+          <div class="fig"><span class="yl">Accuracy</span><img src="static/figures/slimmability_implicit_order_dofa.png" alt="Dimension ordering ablation, DOFA base" loading="lazy"><div class="xl">Rel. compute requirement</div><div class="cap">DOFA (base)</div></div>
+          <div class="fig"><span class="yl">Accuracy</span><img src="static/figures/slimmability_implicit_order_terramind.png" alt="Dimension ordering ablation, TerraMind base" loading="lazy"><div class="xl">Rel. compute requirement</div><div class="cap">TerraMind-1.0 (base)</div></div>
+          <div class="fig"><span class="yl">Accuracy</span><img src="static/figures/slimmability_implicit_order_prithvi2_300.png" alt="Dimension ordering ablation, Prithvi 300M" loading="lazy"><div class="xl">Rel. compute requirement</div><div class="cap">Prithvi-EO-2.0 (300M)</div></div>
         </div>
+        <p class="fig-caption">Keeping the first, last or a random subset of dimensions (20 draws, 2σ) gives comparable results. Deviations appear only below ≈1% compute and are not consistent across models.</p>
+      </div>
+      <div class="fig-panel" data-id="knn" data-title="k-NN vs. linear">
+        <div class="fig-legend"><img src="static/figures/knn_vs_linear_legend_only.png" alt="Legend: k-NN, linear" loading="lazy"></div>
+        <div class="fig-row c3">
+          <div class="fig"><span class="yl">Accuracy</span><img src="static/figures/knn_vs_linear_dofa_large_m-eurosat.png" alt="k-NN vs linear, DOFA large, m-eurosat" loading="lazy"><div class="xl">Rel. compute requirement</div><div class="cap">DOFA (large) · m-eurosat</div></div>
+          <div class="fig"><span class="yl">Accuracy</span><img src="static/figures/knn_vs_linear_terramind_large_m-eurosat.png" alt="k-NN vs linear, TerraMind large, m-eurosat" loading="lazy"><div class="xl">Rel. compute requirement</div><div class="cap">TerraMind-1.0 (large) · m-eurosat</div></div>
+          <div class="fig"><span class="yl">Accuracy</span><img src="static/figures/knn_vs_linear_prithvi2_600_m-eurosat.png" alt="k-NN vs linear, Prithvi 600M, m-eurosat" loading="lazy"><div class="xl">Rel. compute requirement</div><div class="cap">Prithvi-EO-2.0 (600M) · m-eurosat</div></div>
+          <div class="fig"><span class="yl">mAP</span><img src="static/figures/knn_vs_linear_dofa_large_m-bigearthnet.png" alt="k-NN vs linear, DOFA large, m-bigearthnet" loading="lazy"><div class="xl">Rel. compute requirement</div><div class="cap">DOFA (large) · m-bigearthnet</div></div>
+          <div class="fig"><span class="yl">mAP</span><img src="static/figures/knn_vs_linear_terramind_large_m-bigearthnet.png" alt="k-NN vs linear, TerraMind large, m-bigearthnet" loading="lazy"><div class="xl">Rel. compute requirement</div><div class="cap">TerraMind-1.0 (large) · m-bigearthnet</div></div>
+          <div class="fig"><span class="yl">mAP</span><img src="static/figures/knn_vs_linear_prithvi2_600_m-bigearthnet.png" alt="k-NN vs linear, Prithvi 600M, m-bigearthnet" loading="lazy"><div class="xl">Rel. compute requirement</div><div class="cap">Prithvi-EO-2.0 (600M) · m-bigearthnet</div></div>
+        </div>
+        <p class="fig-caption">Linear probes win at large widths, k-NN tends to win for heavily slimmed models. The crossover width is not consistent across models or datasets.</p>
+      </div>
+      <div class="fig-panel" data-id="train" data-title="Training dynamics">
+        <div class="fig-legend"><img src="static/figures/slimability_during_training_legend_only.png" alt="Legend: training epochs" loading="lazy"></div>
+        <div class="fig-row c2">
+          <div class="fig"><span class="yl">Accuracy</span><img src="static/figures/slimability_during_training_MoCo_m-eurosat.png" alt="Slimmability across epochs, regular MoCo" loading="lazy"><div class="xl">Rel. compute requirement</div><div class="cap">MoCo · regular</div></div>
+          <div class="fig"><span class="yl">Accuracy</span><img src="static/figures/slimability_during_slimable_training_MoCo_m-eurosat.png" alt="Slimmability across epochs, slimmable MoCo" loading="lazy"><div class="xl">Rel. compute requirement</div><div class="cap">MoCo · slimmable</div></div>
+          <div class="fig"><span class="yl">Accuracy</span><img src="static/figures/slimability_during_training_MAE_m-eurosat.png" alt="Slimmability across epochs, regular MAE" loading="lazy"><div class="xl">Rel. compute requirement</div><div class="cap">MAE · regular</div></div>
+          <div class="fig"><span class="yl">Accuracy</span><img src="static/figures/slimability_during_slimable_training_MAE_m-eurosat.png" alt="Slimmability across epochs, slimmable MAE" loading="lazy"><div class="xl">Rel. compute requirement</div><div class="cap">MAE · slimmable</div></div>
+        </div>
+        <p class="fig-caption">k-NN accuracy on m-eurosat at checkpoints during pretraining. Slimmable MAE improves for 200 epochs, then drops by almost 20% and never fully recovers. Slimmable MoCo equalises accuracy across widths with longer training.</p>
       </div>
     </div>
   </div>
 </section>
-<!-- End youtube video -->
 
+<!-- ================= CODE ================= -->
+<section id="code" class="alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Code &amp; reproducibility</span>
+      <h2>Open code, pinned environment</h2>
+      <p>All code for the experiments on this page will be released. <!-- TODO: link the code repository --></p>
+    </div>
+    <div class="grid-2 reveal">
+      <div class="card">
+        <ul class="checklist">
+          <li><span><b>MIT license.</b></span></li>
+          <li><span><b>Pinned dependencies</b> via Poetry's lockfile, plus the resolved environment specification.</span></li>
+          <li><span><b>Checkpoint sources</b> for every evaluated model.</span></li>
+          <li><span><b>Fixed seeds:</b> experiments with <i>n</i> runs use seeds {0, …, n−1}.</span></li>
+          <li><span><b>CPU-friendly analysis:</b> k-NN, EVR, correlation and effective dimension run on 16 CPU cores; feature extraction for all widths takes under 30 minutes per model.</span></li>
+        </ul>
+      </div>
+      <div>
+        <pre class="code" aria-label="Illustrative PyTorch snippet"><span class="c"># Illustration of the idea, not the released API</span>
+<span class="k">def</span> slim_ffn(x, fc1, fc2, s):
+    dh = max(1, int(s * fc1.out_features))
+    h = act(x @ fc1.weight[:dh].T + fc1.bias[:dh])
+    <span class="k">return</span> h @ fc2.weight[:, :dh].T + fc2.bias
 
-<!-- Video carousel -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <h2 class="title is-3">Another Carousel</h2>
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item item-video1">
-          <!-- TODO: Add poster image for better preview -->
-          <video poster="" id="video1" controls muted loop height="100%" preload="metadata">
-            <!-- Your video file here -->
-            <source src="static/videos/carousel1.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-video2">
-          <!-- TODO: Add poster image for better preview -->
-          <video poster="" id="video2" controls muted loop height="100%" preload="metadata">
-            <!-- Your video file here -->
-            <source src="static/videos/carousel2.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-video3">
-          <!-- TODO: Add poster image for better preview -->
-          <video poster="" id="video3" controls muted loop height="100%" preload="metadata">
-            <!-- Your video file here -->
-            <source src="static/videos/carousel3.mp4" type="video/mp4">
-          </video>
-        </div>
+<span class="k">def</span> slim_heads(W, b, H, dk, s):
+    k = max(1, int(s * dk))
+    idx = torch.cat([torch.arange(i*dk, i*dk + k) <span class="k">for</span> i <span class="k">in</span> range(H)])
+    <span class="k">return</span> W[idx], b[idx]   <span class="c"># rows for Q, K, V; columns for W_O</span></pre>
       </div>
     </div>
   </div>
 </section>
-<!-- End video carousel -->
 
-
-
-
-
-
-<!-- Paper poster -->
-<section class="hero is-small is-light">
-  <div class="hero-body">
-    <div class="container">
-      <h2 class="title">Poster</h2>
-
-      <!-- TODO: Replace with your poster PDF -->
-      <iframe  src="static/pdfs/sample.pdf" width="100%" height="550">
-          </iframe>
-        
-      </div>
+<!-- ================= CITE ================= -->
+<section id="cite">
+  <div class="wrap narrow">
+    <div class="section-head reveal"><span class="eyebrow">Citation</span><h2>BibTeX</h2></div>
+    <div class="bib reveal">
+      <button class="copy" id="copy-bib" type="button">Copy</button>
+<pre id="bibtex">@inproceedings{hackel2026slimmable,
+  title     = {How Much of a Model Do We Need? Redundancy and Slimmability
+               in Remote Sensing Foundation Models},
+  author    = {Hackel, Leonard and Burgert, Tom and Demir, Beg{\"u}m},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  year      = {2026}
+}</pre>
     </div>
-  </section>
-<!--End paper poster -->
-
-
-
-<!--BibTex citation -->
-  <section class="section" id="BibTeX">
-    <div class="container is-max-desktop content">
-      <div class="bibtex-header">
-        <h2 class="title">BibTeX</h2>
-        <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
-          <i class="fas fa-copy"></i>
-          <span class="copy-text">Copy</span>
-        </button>
-      </div>
-      <pre id="bibtex-code"><code>@article{YourPaperKey2024,
-  title={Your Paper Title Here},
-  author={First Author and Second Author and Third Author},
-  journal={Conference/Journal Name},
-  year={2024},
-  url={https://your-domain.com/your-project-page}
-}</code></pre>
-    </div>
+    <p class="muted small" style="margin-top:24px">This work is supported by the European Research Council Project Agent-BigEarth (No. 101292498) and the European Union Horizon Project PROTEUS (No. 101296397).</p>
+  </div>
 </section>
-<!--End BibTex citation -->
+</main>
 
-
-  <footer class="footer">
-  <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-8">
-        <div class="content">
-
-          <p>
-            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
-            You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
-            Commons Attribution-ShareAlike 4.0 International License</a>.
-          </p>
-
-        </div>
-      </div>
-    </div>
+<footer>
+  <div class="wrap">
+    <span>© 2026 Hackel, Burgert, Demir · BIFOLD / TU Berlin</span>
+    <span>Interactive curves are read from the paper's vector figures. Sentinel-2 patch from BigEarthNet.</span>
   </div>
 </footer>
-
-<!-- Statcounter tracking code -->
-  
-<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
-
-    <!-- End of Statcounter Code -->
-
-  </body>
-  </html>
+</body>
+</html>
