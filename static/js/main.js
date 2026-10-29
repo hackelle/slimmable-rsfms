@@ -45,7 +45,7 @@
     'm-so2sat': '17 local climate zones with geographically disjoint train and test cities (Cultural-10 split) make this the hardest classification setting.',
     'm-cashew-plant': 'Dense prediction is even more robust: all RS FMs keep 97–101% of full-scale IoU at their smallest scale, with curves effectively indistinguishable from full scale.',
     'm-SA-crop-type': 'The more complex 10-class crop-type segmentation still retains 78–94% at minimum compute budget, with Panopticon retaining 84% at its smallest scale.',
-    'oscd': 'Change detection is also robust under slimming: both DOFA models and Prithvi-EO-2.0 (300M) exceed their full-scale score at small widths, and the non-monotonic pattern mirrors classification.'
+    'oscd': 'All models retain almost full IoU at minimum compute budget. Both DOFA models, CopernicusFM and Prithvi-EO-2.0 (300M) exceed full scale, while Prithvi-EO-2.0 (600M), Panopticon, both TerraMind models and both SSL4EO models retain more than 90%. The non-monotonic pattern mirrors classification.'
   };
 
   const DS_LABEL = { 'm-eurosat': 'm-eurosat', 'm-bigearthnet': 'm-bigearthnet', 'm-brick-kiln': 'm-brick-kiln', 'm-so2sat': 'm-so2sat', 'm-cashew-plant': 'm-cashew-plant', 'm-SA-crop-type': 'm-SA-crop-type', 'oscd': 'OSCD' };

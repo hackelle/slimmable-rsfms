@@ -28,7 +28,7 @@ DS = {'m-eurosat': ('Accuracy', 'Scene classification, single-label, 10 classes'
       'm-so2sat': ('Accuracy', 'Scene classification, 17 local climate zones'),
       'm-cashew-plant': ('IoU', 'Semantic segmentation, 7 classes'),
       'm-SA-crop-type': ('IoU', 'Semantic segmentation, 10 crop types'),
-      'oscd': ('F1 (macro)', 'Change detection, binary')}
+      'oscd': ('IoU', 'Change detection, binary')}
 data = {'posthoc': {}, 'native': {}}
 cm = L('post_hoc_slimming_existing_fms')
 for ds, (yl, desc) in DS.items():
