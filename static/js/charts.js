@@ -10,7 +10,7 @@
     'Prithvi-EO-2.0 (300M)': ['aqua', 1], 'Prithvi-EO-2.0 (600M)': ['aqua', 0],
     'SSL4EO ViT-S (Dino)': ['violet', 1], 'SSL4EO ViT-S (MoCo)': ['violet', 0],
     'TerraMind-1.0 (base)': ['orange', 1], 'TerraMind-1.0 (large)': ['orange', 0],
-    'Panopticon': ['magenta', 0], 'Copernicus-FM': ['yellow', 0],
+    'Panopticon': ['magenta', 0], 'Copernicus-FM': ['yellow', 0], 'Panopticon (base)': ['magenta', 0], 'CopernicusFM (base)': ['yellow', 0],
     'RS FMs @ 4 RS datasets (avg.)': ['green', 0], 'RS FMs @ m-eurosat': ['green', 0],
     'CV MAE @ ImageNet-10': ['orange', 0], 'CV DINOv2 @ ImageNet-10': ['yellow', 0],
     'CV MAE @ ImageNet-100': ['red', 0], 'CV MAE @ m-eurosat': ['violet', 0],
